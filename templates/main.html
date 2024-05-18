@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to <br> The Best Email Marketing Platform <br> EVER!!</h1>
+    <p>Please choose an action:</p>
+    <a href="/login" class="btn">Login</a>
+    <a href="/register" class="btn">Register</a>
+    <script>
+        // Function to check if cookies exist
+        function checkCookies() {
+            // Check if the username cookie exists
+            if (document.cookie.includes("username")) {
+                // If the cookie exists, clear it
+                clearCookies();
+            }
+        }
+
+        // Function to clear cookies
+        function clearCookies() {
+            // Set expiration date in the past to delete cookies
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            // Redirect to the main page
+            window.location.href = "/";
+        }
+
+        // Call the function when the page loads
+        window.onload = checkCookies;
+    </script>
+</body>
+</html>
