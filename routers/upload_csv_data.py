@@ -1,6 +1,15 @@
 import io
 import uuid
-from fastapi import APIRouter, Cookie, File, Form, HTTPException, Request, UploadFile
+from fastapi import (
+    APIRouter,
+    Cookie,
+    File,
+    Form,
+    HTTPException,
+    Request,
+    UploadFile,
+    requests,
+)
 from fastapi.templating import Jinja2Templates
 from database import DBManager
 import os
@@ -31,9 +40,21 @@ async def upload_file(
     file: UploadFile = File(None), url: str = Form(None), username: str = Cookie(None)
 ):
     if url:
-        # Fetch file from URL
-        df = pd.read_csv(url)
-        file_name = url.split("/")[-1]  # Extract file name from URL
+        if url.endswith(".csv"):
+            # If the URL ends with .csv, directly read the CSV file
+            df = pd.read_csv(url)
+            file_name = url.split("/")[-1]  # Extract file name from URL
+        elif "drive.google.com" in url:
+            # If the URL is from Google Drive, construct a direct download link
+            file_id = url.split("/")[-2]
+            download_url = f"https://drive.google.com/uc?id={file_id}"
+            response = requests.get(download_url)
+            df = pd.read_csv(io.BytesIO(response.content))
+            file_name = (
+                file_id + ".csv"
+            )  # File name from Google Drive might not be available, so using file ID
+        else:
+            raise HTTPException(status_code=400, detail="Unsupported URL format")
     elif file:
         # Process file upload
         contents = await file.read()  # Read the contents of the file
