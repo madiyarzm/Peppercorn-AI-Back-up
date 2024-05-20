@@ -1,5 +1,6 @@
 import os
-from fastapi import APIRouter, Cookie, Depends, Form, HTTPException, Request
+from fastapi import APIRouter, Cookie, Form, HTTPException, Request
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 from database import DBManager
@@ -18,9 +19,9 @@ templates = Jinja2Templates(directory=templates_directory)
 
 ses_client = boto3.client(
     service_name="ses",
-    region_name="us-west-1",  # os.environ.get("AWS_REGION"),
-    aws_access_key_id="AKIA2UC27WEASULY4YOY",  # os.environ.get("AWS_ACCESS_KEY"),
-    aws_secret_access_key="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",  # os.environ.get("AWS_SECRET_ACCESS_KEY"),
+    region_name=os.environ.get("AWS_REGION"),
+    aws_access_key_id=os.environ.get("AWS_ACCESS_KEY"),
+    aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
 
 
@@ -41,7 +42,6 @@ async def get_email_addresses_from_db(username: str = Cookie(None)):
 
 @sending_emails_router.post("/send-email")
 async def send_email(
-    request: Request,
     username: str = Cookie(None),
     subject: str = Form(...),
     body: str = Form(...),
@@ -52,12 +52,8 @@ async def send_email(
             email_addresses=email_addresses, subject=subject, body=body
         )
 
-        print(
-            f"Sending email with subject: {email_content.subject} and body: {email_content.body}"
-        )
-
         response = ses_client.send_email(
-            Source="admin@edrt.net",
+            Source="momedhat2005@gmail.com",
             Destination={"ToAddresses": email_addresses},
             Message={
                 "Subject": {"Data": email_content.subject},
@@ -69,3 +65,12 @@ async def send_email(
     except Exception as e:
         print(f"Error sending email: {e}")
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@sending_emails_router.post("/verify-email")
+async def verify_email_identity(username: str = Cookie(None)):
+    email_addresses = await get_email_addresses_from_db(username)
+    response = ses_client.verify_email_identity(EmailAddress="momedhat2005@gmail.com")
+    print("Verify Response: ", response)
+    # Redirect the user to "/send-email"
+    return RedirectResponse(url="/send-email")
