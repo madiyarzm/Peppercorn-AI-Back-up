@@ -78,6 +78,7 @@ async def customer_list(
     if not existing_user:
         raise HTTPException(status_code=401, detail="Unauthorized access")
 
+    customers = existing_user.get("customers", [])
     return templates.TemplateResponse(
-        "customer_list.html", {"request": request, "client": existing_user}
+        "customer_list.html", {"request": request, "customers": customers}
     )
