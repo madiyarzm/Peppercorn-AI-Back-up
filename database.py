@@ -57,16 +57,20 @@ class DBManager:
 
     def update_clients_add_customers(self, client_username, new_customers):
         # Fetch the current customers for the client
-        client = self.clients_collection.find_one({"username": client_username}, {"customers": 1})
-        
-        if "customers" not in client:
+        client = self.clients_collection.find_one(
+            {"username": client_username}, {"customers": 1}
+        )
+
+        if not client or "customers" not in client:
             current_customers = []
         else:
             current_customers = client["customers"]
-        
+
         # Extract the emails of the current customers into a dictionary for fast lookup
-        current_customer_dict = {customer["email"]: customer for customer in current_customers}
-        
+        current_customer_dict = {
+            customer["email"]: customer for customer in current_customers
+        }
+
         # Lists to hold new customers and updates
         unique_new_customers = []
         customers_to_update = []
@@ -82,18 +86,24 @@ class DBManager:
                 # New customer
                 unique_new_customers.append(new_customer)
 
-        if unique_new_customers:
-            # Update the clients collection to append only the unique new customers
-            self.clients_collection.update_one(
-                {"username": client_username},
-                {"$push": {"customers": {"$each": unique_new_customers}}},
+        # Merge new and existing customers with updates into a single list
+        merged_customers = current_customers
+        for customer in unique_new_customers:
+            merged_customers.append(customer)
+        for customer in customers_to_update:
+            # Find the index of the customer to update
+            index = next(
+                (
+                    i
+                    for i, c in enumerate(merged_customers)
+                    if c["email"] == customer["email"]
+                ),
+                None,
             )
-        
-        if customers_to_update:
-            # Update the existing customers
-            for updated_customer in customers_to_update:
-                self.clients_collection.update_one(
-                    {"username": client_username},
-                    {"$set": {"customers.$": updated_customer}}
-                )
-# , "customers.email": updated_customer["email"] --> line 96
+            if index is not None:
+                merged_customers[index] = customer
+
+        # Update the clients collection with the merged customers list
+        self.clients_collection.update_one(
+            {"username": client_username}, {"$set": {"customers": merged_customers}}
+        )
