@@ -80,5 +80,5 @@ async def customer_list(
 
     customers = existing_user.get("customers", [])
     return templates.TemplateResponse(
-        "customer_list.html", {"request": request, "customers": customers}
+        "customer_list.html", {"request": request, "customer_data": customers}
     )

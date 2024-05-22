@@ -13,9 +13,9 @@ app.include_router(upload_data_router)
 app.include_router(retrieve_data_router)
 app.include_router(sending_emails_router)
 
-parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+parent_directory = os.path.dirname(os.path.abspath(__file__))
 static_directory = os.path.join(parent_directory, "static")
-app.mount(static_directory, StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=static_directory), name="static")
 
 if __name__ == "__main__":
     import uvicorn
