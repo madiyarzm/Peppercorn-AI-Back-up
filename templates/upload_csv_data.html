@@ -5,30 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Data</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
         @import url('https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined');
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
         body {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: rgba(46, 46, 46, 1);
             color: white;
         }
         .container {
-            max-width: 800px; /* Increase the max-width */
+            max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            background-color: rgba(57, 57, 57, 1); /* Dark gray background */
+            background-color: rgba(46, 46, 46, 1);
+            border: 2px solid rgba(90, 90, 90, 1);
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(57, 57, 57, 1);
-            color: #ffffff; /* White text */
-            border: 2px solid #ffffff; /* Make the border bolder */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
         }
         h1 {
             text-align: center;
             margin-bottom: 30px;
+            font-weight: 500;
         }
         .option-container {
             display: flex;
@@ -46,17 +47,16 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
-            display: none;
         }
         .drag-file-area {
-            border: 4px dashed #ffffff; /* White border */
+            border: 6px dashed #ffffff;
             border-radius: 40px;
-            margin: 40px 0 60px; /* Increase top and bottom margins */
-            width: 100%; /* Update width to 100% */
+            margin: 40px 0 60px;
+            width: 97%;
+            height: 250px;
             text-align: center;
-            color: #ffffff; /* White text */
-            background-color: rgba(57, 57, 57, 1); /* Black background */
-            display: none;
+            color: #ffffff;
+            background-color: rgba(57, 57, 57, 1);
         }
         .drag-file-area .upload-icon {
             font-size: 50px;
@@ -99,7 +99,7 @@
             color: #f7fff7;
             background-color: #000000;
             transition: all 1s;
-            width: 100%;
+            width: 97%;
             position: relative;
             display: none;
             flex-direction: row;
@@ -134,25 +134,31 @@
             border-radius: 25px;
             background-color: #4BB543;
         }
+        .dynamic-message {
+            margin-top: 30px;
+        }
+        #uploadd {
+            padding-top: 60px;
+        }
         .upload-button {
             font-family: 'Montserrat';
             background-color: rgba(7, 7, 7, 0.8);
             color: #f7fff7;
             display: flex;
             align-items: center;
-            justify-content: center; /* Center horizontally */
+            justify-content: center;
             font-size: 18px;
             border: none;
             border-radius: 20px;
-            margin: 10px auto; /* Center horizontally */
+            margin: 10px auto;
             padding: 7.5px 50px;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
+    <h1>Upload Data</h1>
     <div class="container">
-        <h1>Upload Data</h1>
         <form id="upload-form" enctype="multipart/form-data" method="POST">
             <div class="option-container">
                 <input type="radio" id="file-option" name="upload-option" value="file" checked>
@@ -160,23 +166,24 @@
                 <input type="radio" id="url-option" name="upload-option" value="url">
                 <label for="url-option">Upload from URL</label>
             </div>
-            <input type="file" id="file" name="file" accept=".csv" required>
-            <input type="url" id="url" name="url" placeholder="Enter URL">
-            <div class="drag-file-area" id="drag-file-area">
-                <span class="material-icons-outlined upload-icon">file_upload</span>
+            
+            <input type="url" id="url" name="url" placeholder="Enter URL" style="display: none;">
+            
+            <div class="drag-file-area" id="drag-file-area" style="display: block;">
+                <span id="uploadd" class="material-icons-outlined upload-icon">file_upload</span>
                 <h3 class="dynamic-message">Drag & drop .csv file here</h3>
-                <!-- <label class="label">or <span class="browse-files"><input type="file" class="default-file-input" />  <span>from device</span></span></label> -->
+                <label class="label"><span class="browse-files"></span></label>
             </div>
+            <input type="file" id="file" name="file" accept=".csv" style="display: block;" required>
             <span class="cannot-upload-message"><span class="material-icons-outlined">error</span> Please select a file first <span class="material-icons-outlined cancel-alert-button">cancel</span></span>
             <div class="file-block">
                 <div class="file-info"><span class="material-icons-outlined file-icon">description</span> <span class="file-name"></span> | <span class="file-size"></span></div>
                 <span class="material-icons remove-file-icon">delete</span>
                 <div class="progress-bar"></div>
             </div>
-            <button type="submit" class="upload-button">Upload</button>
         </form>
     </div>
-
+    <button type="submit" class="upload-button">Upload</button>
     <script>
         const fileOption = document.getElementById('file-option');
         const urlOption = document.getElementById('url-option');
@@ -224,7 +231,7 @@
             const dragDropText = document.querySelector(".dynamic-message");
             uploadIcon.innerHTML = 'check_circle';
             dragDropText.innerHTML = 'File Dropped Successfully!';
-            document.querySelector(".label").innerHTML = `drag & drop or <span class="browse-files"><input type="file" class="default-file-input" /> <span class="browse-files-text" style="top: 0;">browse file</span></span>`;
+            document.querySelector(".label").innerHTML = `<span class="browse-files"> <span class="browse-files-text" style="top: 0;"></span></span>`;
             uploadButton.innerHTML = `Upload`;
             fileName.innerHTML = fileInput.files[0].name;
             fileSize.innerHTML = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
@@ -282,7 +289,7 @@
             const dragDropText = document.querySelector(".dynamic-message");
             uploadIcon.innerHTML = 'file_upload';
             dragDropText.innerHTML = 'Drag & drop any file here';
-            document.querySelector(".label").innerHTML = `or <span class="browse-files"><input type="file" class="default-file-input" /><span class="browse-files-text">browse file</span><span>from device</span></span>`;
+            document.querySelector(".label").innerHTML = `or <span class="browse-files"><span class="browse-files-text">browse file</span><span>from device</span></span>`;
             uploadButton.innerHTML = `Upload`;
         });
 
@@ -315,7 +322,7 @@
                 const dragDropText = document.querySelector(".dynamic-message");
                 uploadIcon.innerHTML = 'check_circle';
                 dragDropText.innerHTML = 'File Dropped Successfully!';
-                document.querySelector(".label").innerHTML = `drag & drop or <span class="browse-files"><input type="file" class="default-file-input" style="" /><span class="browse-files-text" style="top: -23px; left: -20px;">browse file</span></span>`;
+                document.querySelector(".label").innerHTML = `<span class="browse-files"></span></span>`;
                 uploadButton.innerHTML = `Upload`;
 
                 let files = e.dataTransfer.files;
