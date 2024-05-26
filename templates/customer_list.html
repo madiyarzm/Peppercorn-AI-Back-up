@@ -6,22 +6,18 @@
     <title>Customer List</title>
     <style>
         body {
-        font-family: 'Inter', sans-serif;
-        background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%); /* Градиентный фон от светло-розового к темно-серому */
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        position: relative; /* Added to position .donthave */
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            position: relative; /* Added to position .donthave */
         }
 
-        body {
-            background-color: #000000;
-        }
-
-                /* Stars */
+        /* Stars */
         .star {
             position: absolute;
             width: 2px;
@@ -32,23 +28,20 @@
         }
 
         @keyframes twinkle {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0.3;
-            }
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
         }
+
         .container {
             margin: 20px auto;
+            margin-top: 250px;
             padding: 20px;
             background-color: #042551;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 800px;
+            text-align: center;
         }
 
         h1 {
@@ -75,39 +68,11 @@
         tr:hover {
             background-color: #f5f5f5;
         }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #5c3838;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh;
-        }
-        .container {
-            text-align: center;
-        }
-        h2 {
-            color: #333;
-        }
-        #customer-list {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
-        }
-        #customer-list div {
-            margin-bottom: 10px;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
+
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            margin: 100px;
+            margin: 20px;
             font-size: 16px;
             cursor: pointer;
             border: none;
@@ -117,128 +82,168 @@
             text-decoration: none;
             transition: background-color 0.3s;
         }
+
         .btn:hover {
             background-color: #0056b3;
         }
 
-        .container {
-            width: 400px;
-            border: 2px solid rgba(90, 90, 90, 1); /* Создание границы 2px с указанным цветом */
-            height: 55%;
-            padding: 40px;
-            background-color: #042551; /* Темно-серый фон для формы */
-            border-radius: 30px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Углубленная тень для большего акцента */
-            position: relative; /* Added to position .donthave */
-            margin-bottom: 20px; /* Добавлено для отступа между формой и текстом */
+        .row {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
         }
-        h2 {
-            color: #fff; /* White color for text */
-            margin-top: -10px;
-            margin-bottom: 30px; /* More space under the header */
-            font-size: 40px; /* Larger font size */
+        
+        .container1 {
+            width: 100%;
+            padding: 18px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .container1 li {
+            list-style: none;
+            margin-left: 80px;
             text-align: center;
+            display: inline;
         }
-        form {
-            display: block;
-        }
-        form div {
-            margin-bottom: 20px;
-        }
-        label {
-            margin-left: 37px;
-            display: block;
-            margin-bottom: 8px;
-            color: #fff; /* Lighter color for labels */
-            font-size: 12px;
-        }
-        input[type="text"],
-        input[type="password"] {
-            margin-left: 37px;
-            margin-bottom: 10px; /* Эта строка кода создает пространство между полями ввода */
-            width: 75%;
-            padding: 10px;
-            border: 2px solid rgba(129, 129, 129, 1); /* Создание границы 3px с указанным цветом */
-            border-radius: 6px;
-            background-color: rgba(190, 187, 185, 1); /* Темный фон для ввода */
-            color: #000000; /* Белый текст для ввода */
-            font-weight: bold;
-        }
-        button[type="submit"] {
-            width: 150px;
-            font: Inter;
-            font-size: 15px;
-            margin-top: 10px;
-            margin-left: 125px;
-            padding: 10px;
-            border: none;
+
+        .container1 li a {
+            text-decoration: none;
+            padding: 14px 20px;
+            font-size: 16px;
             border-radius: 4px;
-            background-color: rgba(7, 7, 7, 1); /* Dark gray button */
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-bottom: 10px;
-        }
-        button[type="submit"]:hover {
-            width: 150px;
-            background-color: #777; /* Lighter gray on hover */
-        }
-        .policy{
+            color: #f2f2f2;
+            display: inline-block;
             text-align: center;
-            font-size: 12px;
-            color: #fff;
-            margin-bottom: -3px;
+            letter-spacing: 1px;
+            transition: all .3s ease-in;
+            font-family: "Inter", sans-serif;
         }
-        .donthave2 {
-            width: 100%; /* Занимает всю ширину */
-            position: absolute; /* Используется абсолютное позиционирование */
-            bottom: 10px; /* Расположение внизу */
-            text-align: center; /* Выравнивание текста по центру */
-            color: #fff;
-            font-size: 12px;
+
+        .container1 li a:hover {
+            background-color: #DDFFD9;
+            background-color: #091e9627;
+            color: rgb(210, 210, 210);
         }
-        .row{
-            margin-top: 25%;
-            margin-left: -25%;
+
+   
+            /* SHIFT */
+        nav.shift ul li a {
+        position:relative;
+        z-index: 1;
         }
+        nav.shift ul li a:hover {
+        color: #a1a0a0;
+        }
+        nav.shift ul li a:after {
+        display: block;
+        position: absolute;
+        top: 0;
+        border-radius: 3px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        width: 100%;
+        height: 1px;
+        content: '.';
+        color: transparent;
+        background: #0823ba;
+        visibility: none;
+        opacity: 0;
+        z-index: -1;
+        }
+        nav.shift ul li a:hover:after {
+        opacity: 1;
+        visibility: visible;
+        height: 100%;
+        }
+
+        /* Keyframes */
+        @-webkit-keyframes circle {
+        0% {
+            width: 1px;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            height: 1px;
+            z-index: -1;
+            background: #eee;
+            border-radius: 100%;
+        }
+        100% {
+            background: #aaa;
+            height: 5000%;
+            width: 5000%;
+            z-index: -1;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            border-radius: 0;
+        }
+        }
+
+
+
     </style>
 </head>
 <body>
+    <div class="container1">
+        <nav class="shift">
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">CUSTOMER LIST</a></li>
+                <li><a href="send_email">SEND EMAIL</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <div class="container">
         <h1>Customer List</h1>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-        {% for customer in customer_data %}
-        <tr>
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.email }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <div class="row" style="display: flex; justify-content: space-around;">
-        <a href="/upload-csv-data" class="btn" style="background-color: rgba(7, 7, 7, 1);">Upload Data</a>
-        <a href="/retrieve-csv-data" class="btn" style="background-color: rgba(7, 7, 7, 1);">Show Uploaded Data</a>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+            {% for customer in customer_data %}
+            <tr>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="row">
+            <a href="/upload-csv-data" class="btn" style="background-color: rgba(7, 7, 7, 1);">Upload Data</a>
+            <a href="/retrieve-csv-data" class="btn" style="background-color: rgba(7, 7, 7, 1);">Show Uploaded Data</a>
+        </div>
     </div>
-</div>
+
+    <script>
+        const numStars = 150; // Adjust the number of stars as needed
+
+        for (let i = 0; i < numStars; i++) {
+            createStar(i);
+        }
+
+        function createStar(index) {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            star.style.top = Math.random() * 15 + "vh";
+            star.style.left = Math.random() * 100 + "vw";
+            star.style.animationDelay = Math.random() * 5 + "s";
+            document.body.appendChild(star);
+        }
+    </script>
 </body>
-
-<script>
-    const numStars = 150; // Adjust the number of stars as needed
-
-for (let i = 0; i < numStars; i++) {
-createStar(i);
-}
-
-function createStar(index) {
-const star = document.createElement("div");
-star.classList.add("star");
-star.style.top = Math.random() * 15 + "%";
-star.style.left = Math.random() * 100 + "%";
-star.style.animationDelay = Math.random() * 5 + "s";
-document.body.appendChild(star);
-}
-</script>
 </html>

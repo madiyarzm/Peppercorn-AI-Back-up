@@ -6,10 +6,41 @@
     <title>Uploaded Data</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%); /* Градиентный фон от светло-розового к темно-серому */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative; /* Added to position .donthave */
+        }
+
+        body {
+            background-color: #000000;
+        }
+
+                /* Stars */
+        .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background-color: #fff;
+        border-radius: 50%;
+        animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.3;
+        }
         }
         h1 {
             text-align: center;
@@ -62,6 +93,17 @@
     </style>
 </head>
 <body>
+    <div class="container1">
+        <nav class="shift">
+            <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">CUSTOMER LIST</a></li>
+            <li><a href="#">SEND EMAIL</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
     <h1>Uploaded Data</h1>
     <div class="file-container">
         {% for data in uploaded_data %}
@@ -114,6 +156,20 @@
                 }
             });
         });
+        const numStars = 150; // Adjust the number of stars as needed
+
+        for (let i = 0; i < numStars; i++) {
+        createStar(i);
+        }
+
+        function createStar(index) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * 15 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        star.style.animationDelay = Math.random() * 5 + "s";
+        document.body.appendChild(star);
+        }
     </script>
     
 </body>

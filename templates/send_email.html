@@ -6,27 +6,59 @@
     <title>Send Email</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%); /* Градиентный фон от светло-розового к темно-серому */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative; /* Added to position .donthave */
+        }
+
+        body {
+            background-color: #000000;
+        }
+
+                /* Stars */
+        .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background-color: #fff;
+        border-radius: 50%;
+        animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.3;
+        }
         }
         .container {
             width: 80%;
             margin: auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #042551; /* Темно-серый фон для формы */
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-top: 50px;
+            color: #fff;
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: white;
         }
         label {
             font-weight: bold;
-            color: #333;
+            color: white;
         }
         input[type="text"], textarea {
             width: 100%;
@@ -52,7 +84,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+ <!-- <div class="container">
         <h1>Send Email</h1>
         <form action="/send-email" method="post">
             <label for="subject">Subject:</label>
@@ -61,6 +93,38 @@
             <textarea id="body" name="body" placeholder="Enter email body..." rows="8" required></textarea>
             <button type="submit">Send Email</button>
         </form>
+    </div> -->
+    <div id="editor">
+        <p>This is the editor content.</p>
     </div>
+    <script src="./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                window.editor = editor;
+            } )
+            .catch( error => {
+                console.error( 'There was a problem initializing the editor.', error );
+            } );
+    </script>
+
+<script src="https://cdn.ckbox.io/CKBox/2.0.0/ckbox.js"></script>
+		<script src="./dist/main.js"></script>
+    <script>const numStars = 150; // Adjust the number of stars as needed
+
+        for (let i = 0; i < numStars; i++) {
+        createStar(i);
+        }
+
+        function createStar(index) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * 15 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        star.style.animationDelay = Math.random() * 5 + "s";
+        document.body.appendChild(star);
+        }
+</script>
 </body>
 </html>
