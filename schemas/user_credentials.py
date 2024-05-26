@@ -3,6 +3,10 @@ from pydantic import BaseModel, validator
 import re
 
 
+class UserCredentialsLogin(BaseModel):
+    username: str
+    password: str
+
 class UserCredentials(BaseModel):
     username: str
     password: str
