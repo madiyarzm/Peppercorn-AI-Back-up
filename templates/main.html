@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: url('/static/mainpage.png'); /* Ensure this URL is correct */
+            background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%);
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center; /* Ensures the background image is centered */
@@ -20,35 +20,74 @@
             height: 100vh;
             color: white; /* White text for better visibility on a dark background */
         }
+        
+        body {
+            background-color: #000000;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Stars */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.3;
+            }
+        }
+
         h1 {
             font-size: 32px; /* Appropriate font size for main title */
-            margin-bottom: 0.5em; /* Space below the title */
             text-align: center;
+            margin-top: 150px;
+            font-size: 50px;
+            margin-bottom: -100;
         }
         h2 {
-            font-size: 20px; /* Subtitle size that complements the main title */
-            margin-bottom: 2em; /* Space below the subtitle */
+            font-weight: bold;
             font-weight: 400; /* Less emphasis on the subtitle */
             text-align: center;
+            
+            font-weight: bold; /* Make the subtitle bolder */
+            text-shadow: 2px 2px 40px rgba(18, 18, 18, 0.6); /* Add a more noticeable drop shadow to the subtitle */
         }
 
         h3{
-            margin-top: 0%;
+            text-align: center;
             font-size: 15px;
-            margin-right:46%;
         }
 
         .btn {
             display: inline-block;
-            
             padding: 10px 20px;
             margin: 10px 5px; /* Slightly reduce horizontal margin */
             font-size: 16px;
+            margin-right: 10px;
             font-weight: bold;
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            background-color: rgba(7, 7, 7, 0.8); /* Slightly transparent dark grey */
+            background-color: #253259; /* Slightly transparent dark grey */
             color: #fff;
             text-decoration: none;
             transition: background-color 0.3s, transform 0.3s;
@@ -58,23 +97,37 @@
             transform: translateY(-3px); /* Subtle lift effect */
         }
         .btn-container {
+            margin-top: -100px;
             display: flex;
-            margin-right:46%;
-            padding-top: 50px;
+            margin-right:0%;
             /* padding-top: 100px; */
             justify-content: center;
             width: 100%; /* Full width to center buttons on all screen sizes */
         }
+        h1{
+            text-align: center;
+        }
+        #btwn{
+            font-size: 20px;
+        }
+        .peppercorntitle{
+            margin-top: -200px;
+        }
     </style>
 </head>
-<body>
-    <h3>Revolutionizing email marketing, enhanced by AI.</h3>
+<body class="star-field">
+    <!-- <div class="star-field"></div> -->
+    <div class="peppercorntitle"><h2>Peppercorn AI</h2></div>
+    <!-- <h3 class="revol">Revolutionizing</h3> -->
+    <h1>Email marketing Enhanced by AI</h1>
+    <h1></h1>
     <div class="btn-container">
         <a href="/login" class="btn">Login</a>
+        <h2 id="btwn"></h2>
         <a href="/register" class="btn">Register</a>
     </div>
     <script>
-        // Function to check if cookies exist
+
         function checkCookies() {
             // Check if the username cookie exists
             if (document.cookie.includes("username")) {
@@ -83,7 +136,6 @@
             }
         }
 
-        // Function to clear cookies
         function clearCookies() {
             // Set expiration date in the past to delete cookies
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -91,8 +143,23 @@
             window.location.href = "/";
         }
 
-        // Call the function when the page loads
         window.onload = checkCookies;
+
+        const numStars = 150; // Adjust the number of stars as needed
+
+        for (let i = 0; i < numStars; i++) {
+            createStar(i);
+        }
+
+        function createStar(index) {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            star.style.top = Math.random() * 100 + "%";
+            star.style.left = Math.random() * 100 + "%";
+            star.style.animationDelay = Math.random() * 5 + "s";
+            document.body.appendChild(star);
+        }
+
     </script>
 </body>
 </html>
