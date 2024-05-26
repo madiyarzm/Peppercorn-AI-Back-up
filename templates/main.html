@@ -25,26 +25,35 @@
             background-color: #000000;
         }
 
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         /* Stars */
         .star {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background-color: #fff;
-        border-radius: 50%;
-        animation: twinkle 2s infinite;
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
         }
 
         @keyframes twinkle {
-        0% {
-            opacity: 0;
-        }
-        50% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0.3;
-        }
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.3;
+            }
         }
 
         h1 {

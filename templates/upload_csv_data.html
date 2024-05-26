@@ -20,13 +20,14 @@
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            background-color: rgba(46, 46, 46, 1);
+            background-color: #042551;
             border: 2px solid rgba(90, 90, 90, 1);
             border-radius: 8px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
             color: #ffffff;
         }
         h1 {
+            padding-top: 25px;
             text-align: center;
             margin-bottom: 30px;
             font-weight: 500;
@@ -43,6 +44,7 @@
         }
         input[type="file"], input[type="url"] {
             margin-bottom: 20px;
+            margin-top: -20px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -53,10 +55,10 @@
             border-radius: 40px;
             margin: 40px 0 60px;
             width: 97%;
-            height: 250px;
+            height: 270px;
             text-align: center;
             color: #ffffff;
-            background-color: rgba(57, 57, 57, 1);
+            background-color: rgb(4, 10, 107);
         }
         .drag-file-area .upload-icon {
             font-size: 50px;
@@ -69,7 +71,7 @@
             font-size: 19px;
         }
         .drag-file-area label .browse-files-text {
-            color: #000000;
+            color: #232e79;
             font-weight: bolder;
             cursor: pointer;
         }
@@ -129,8 +131,8 @@
             position: absolute;
             bottom: 0;
             left: 4.5%;
-            width: 0;
-            height: 5px;
+            width: 95%;
+            height: 3px;
             border-radius: 25px;
             background-color: #4BB543;
         }
@@ -141,8 +143,8 @@
             padding-top: 60px;
         }
         .upload-button {
-            font-family: 'Montserrat';
-            background-color: rgba(7, 7, 7, 0.8);
+            font-family: 'Inter';
+            background-color: #253259;
             color: #f7fff7;
             display: flex;
             align-items: center;
@@ -151,12 +153,41 @@
             border: none;
             border-radius: 20px;
             margin: 10px auto;
+            margin-top: 0px;
             padding: 7.5px 50px;
             cursor: pointer;
         }
+        .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background-color: #fff;
+        border-radius: 50%;
+        animation: twinkle 2s infinite;
+        }
+
+        #url{
+            width: 95%;
+            margin-bottom: 30px;
+            padding-top: 190px;
+            padding-bottom: 200px;
+        }
+
+        @keyframes twinkle {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.3;
+        }
+        }
+
     </style>
 </head>
-<body>
+<body class=".stars">
     <h1>Upload Data</h1>
     <div class="container">
         <form id="upload-form" enctype="multipart/form-data" method="POST">
@@ -167,7 +198,7 @@
                 <label for="url-option">Upload from URL</label>
             </div>
             
-            <input type="url" id="url" name="url" placeholder="Enter URL" style="display: none;">
+            <input type="url" id="url" name="url" placeholder="" style="display: none;">
             
             <div class="drag-file-area" id="drag-file-area" style="display: block;">
                 <span id="uploadd" class="material-icons-outlined upload-icon">file_upload</span>
@@ -231,7 +262,7 @@
             const dragDropText = document.querySelector(".dynamic-message");
             uploadIcon.innerHTML = 'check_circle';
             dragDropText.innerHTML = 'File Dropped Successfully!';
-            document.querySelector(".label").innerHTML = `<span class="browse-files"><input type="file" class="default-file-input" /> <span class="browse-files-text" style="top: 0;"></span></span>`;
+            document.querySelector(".label").innerHTML = `<span class="browse-files"> <span class="browse-files-text" style="top: 0;"></span></span>`;
             uploadButton.innerHTML = `Upload`;
             fileName.innerHTML = fileInput.files[0].name;
             fileSize.innerHTML = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
@@ -247,11 +278,11 @@
                     var width = 0;
                     var id = setInterval(frame, 50);
                     function frame() {
-                        if (width >= 390) {
+                        if (width >= 750) {
                             clearInterval(id);
                             uploadButton.innerHTML = `<span class="material-icons-outlined upload-button-icon">check_circle</span> Uploaded`;
                         } else {
-                            width += 5;
+                            width += 15;
                             progressBar.style.width = width + "px";
                         }
                     }
@@ -289,7 +320,7 @@
             const dragDropText = document.querySelector(".dynamic-message");
             uploadIcon.innerHTML = 'file_upload';
             dragDropText.innerHTML = 'Drag & drop any file here';
-            document.querySelector(".label").innerHTML = `or <span class="browse-files"><input type="file" class="default-file-input" /><span class="browse-files-text">browse file</span><span>from device</span></span>`;
+            document.querySelector(".label").innerHTML = `<span class="browse-files"><span class="browse-files-text"></span><span></span></span>`;
             uploadButton.innerHTML = `Upload`;
         });
 
@@ -322,7 +353,7 @@
                 const dragDropText = document.querySelector(".dynamic-message");
                 uploadIcon.innerHTML = 'check_circle';
                 dragDropText.innerHTML = 'File Dropped Successfully!';
-                document.querySelector(".label").innerHTML = `<span class="browse-files"><input type="file" class="default-file-input" style="" /><span class="browse-files-text" style="top: -23px; left: -20px;"></span></span>`;
+                document.querySelector(".label").innerHTML = `<span class="browse-files"><span class="browse-files-text" style="top: -23px; left: -20px;"></span></span>`;
                 uploadButton.innerHTML = `Upload`;
 
                 let files = e.dataTransfer.files;
@@ -335,6 +366,22 @@
                 progressBar.style.width = 0;
             });
         }
+
+        const numStars = 150; // Adjust the number of stars as needed
+
+        for (let i = 0; i < numStars; i++) {
+            createStar(i);
+        }
+
+        function createStar(index) {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            star.style.top = Math.random() * 15 + "%";
+            star.style.left = Math.random() * 100 + "%";
+            star.style.animationDelay = Math.random() * 5 + "s";
+            document.body.appendChild(star);
+        }
+
     </script>
 </body>
 </html>
