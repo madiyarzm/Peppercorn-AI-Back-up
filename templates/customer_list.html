@@ -35,12 +35,13 @@
 
         .container {
             margin: 20px auto;
-            margin-top: 250px;
+            border: 2px solid #8bf;
+            margin-top: 150px;
             padding: 20px;
             background-color: #042551;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
+            width: 600px;
             text-align: center;
         }
 
@@ -59,14 +60,17 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
             text-align: left;
+            color: #e0e0e0;
+            font-weight: bolder;
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #063b79; /* Slightly darker blue for headers */
+            color: #ffffff;
         }
 
         tr:hover {
-            background-color: #f5f5f5;
+            background-color: #084c99;
         }
 
         .btn {
@@ -77,14 +81,14 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #0056b3; /* Dark blue button background */
+            color: #ffffff;
             text-decoration: none;
             transition: background-color 0.3s;
         }
 
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #003d80;
         }
 
         .row {
@@ -200,8 +204,8 @@
     <div class="container1">
         <nav class="shift">
             <ul>
-                <li><a href="main">HOME</a></li>
-                <li><a href="#">CUSTOMER LIST</a></li>
+                <li><a href="/main">HOME</a></li>
+                <li><a href="/customer-list">CUSTOMER LIST</a></li>
                 <li><a href="/send-email">SEND EMAIL</a></li>
                 <li><a href="#">ABOUT</a></li>
                 <li><a href="#">CONTACT</a></li>
@@ -224,8 +228,8 @@
             {% endfor %}
         </table>
         <div class="row">
-            <a href="/upload-csv-data" class="btn" style="background-color: rgba(7, 7, 7, 1);">Upload Data</a>
-            <a href="/retrieve-csv-data" class="btn" style="background-color: rgba(7, 7, 7, 1);">Show Uploaded Data</a>
+            <a href="/upload-csv-data" class="btn">Upload Data</a>
+            <a href="/retrieve-csv-data" class="btn">Show Uploaded Data</a>
         </div>
     </div>
 
