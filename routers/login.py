@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Request, status, Cookie, Response
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 from database import DBManager
-from schemas.user_credentials import UserCredentials
+from schemas.user_credentials import UserCredentials, UserCredentialsLogin
 import os
 
 login_router = APIRouter()
@@ -46,7 +46,7 @@ async def login_user(request: Request):
 
 
 @login_router.post("/login")
-async def login_user(user: UserCredentials):
+async def login_user(user: UserCredentialsLogin):
     # Check if username exists and password matches
     existing_user = DB_Manager.validate_user(
         {"username": user.username, "password": user.password}
