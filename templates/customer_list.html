@@ -36,12 +36,13 @@
         .container {
             margin: 20px auto;
             border: 2px solid #8bf;
-            margin-top: 150px;
+            margin-top: 100px;
+            margin-left: 30%;
             padding: 20px;
             background-color: #042551;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 600px;
+            width: 450px;
             text-align: center;
         }
 
@@ -50,13 +51,24 @@
             color: #fff;
         }
 
-        table {
-            width: 100%;
+        .scrollable-table {
+            width: 600px;
+            margin-left: 60px;
             border-collapse: collapse;
             margin-top: 20px;
+            display: block;
+            overflow-y: auto;
+            height: 350px; /* Adjust the height as needed */
         }
 
-        th, td {
+        .scrollable-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: #063b79; /* Same as your header color */
+        }
+
+        .scrollable-table th, .scrollable-table td {
             padding: 10px;
             border-bottom: 1px solid #ddd;
             text-align: left;
@@ -64,14 +76,10 @@
             font-weight: bolder;
         }
 
-        th {
-            background-color: #063b79; /* Slightly darker blue for headers */
-            color: #ffffff;
-        }
-
-        tr:hover {
+        .scrollable-table tr:hover {
             background-color: #084c99;
         }
+
 
         .btn {
             display: inline-block;
@@ -215,18 +223,23 @@
 
     <div class="container">
         <h1>Customer List</h1>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-            </tr>
-            {% for customer in customer_data %}
-            <tr>
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.email }}</td>
-            </tr>
-            {% endfor %}
+        <table class="scrollable-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customer_data %}
+                <tr>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
+        
         <div class="row">
             <a href="/upload-csv-data" class="btn">Upload Data</a>
             <a href="/retrieve-csv-data" class="btn">Show Uploaded Data</a>
@@ -243,7 +256,7 @@
         function createStar(index) {
             const star = document.createElement("div");
             star.classList.add("star");
-            star.style.top = Math.random() * 15 + "vh";
+            star.style.top = Math.random() * 13 + "vh";
             star.style.left = Math.random() * 100 + "vw";
             star.style.animationDelay = Math.random() * 5 + "s";
             document.body.appendChild(star);
