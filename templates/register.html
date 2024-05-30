@@ -44,7 +44,7 @@
         }
         .container {
             width: 400px;
-            border: 2px solid rgba(90, 90, 90, 1); /* Создание границы 2px с указанным цветом */
+            border: 2px solid #8bf; /* Создание границы 2px с указанным цветом */
             height: 55%;
             padding: 40px;
             background-color: #042551; /* Темно-серый фон для формы */
@@ -68,6 +68,7 @@
         }
         label {
             margin-left: 37px;
+            font-weight: bolder;
             display: block;
             margin-bottom: 8px;
             color: #fff; /* Lighter color for labels */
@@ -79,15 +80,21 @@
             margin-bottom: 10px; /* Эта строка кода создает пространство между полями ввода */
             width: 75%;
             padding: 10px;
-            border: 2px solid rgba(129, 129, 129, 1); /* Создание границы 3px с указанным цветом */
-            border-radius: 6px;
-            background-color: rgba(190, 187, 185, 1); /* Темный фон для ввода */
+            border: 2.5px solid rgb(160, 160, 160); /* Создание границы 3px с указанным цветом */
+            border-radius: 3px;
+            background-color: rgb(235, 233, 233) ; /* Темный фон для ввода */
             color: #000000; /* Белый текст для ввода */
             font-weight: bold;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            background-color: lightblue;
+            border: 4px solid #0c940c;;
         }
         button[type="submit"] {
             width: 150px;
             font: Inter;
+            font-weight: bolder;
             font-size: 15px;
             margin-top: 10px;
             margin-left: 125px;
@@ -102,7 +109,7 @@
         }
         button[type="submit"]:hover {
             width: 150px;
-            background-color: #777; /* Lighter gray on hover */
+            background-color: #0512d1; /* Lighter gray on hover */
         }
         .policy{
             text-align: center;
@@ -116,6 +123,7 @@
             bottom: 10px; /* Расположение внизу */
             text-align: center; /* Выравнивание текста по центру */
             color: #fff;
+            font-weight: bolder;
             font-size: 12px;
         }
     </style>
@@ -141,6 +149,9 @@
             Terms of use.
         </p>
     </div>
+    <p class="donthave2" style="color: #fff; font-size: 15px;">
+        Already have an account? <span onclick="window.location.href='login';" style="cursor: pointer; color: #24447c;">Login</span>
+    </p>
 
     <script>
         document.getElementById('registration-form').addEventListener('submit', async (event) => {
