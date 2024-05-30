@@ -6,6 +6,7 @@
     <title>Send Email</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script defer src="/static/scripts/texteditor.js"></script>
     <style>
         body {
         font-family: 'Inter', sans-serif;
@@ -180,33 +181,16 @@
         </nav>
     </div>
     <div id="editor">
-        <p>This is the editor content.</p>
+
     </div>
-    <script src="./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+    <script src="/static/ckeditor5/ckeditor.js"></script>
     <script>
         ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( editor => {
-                window.editor = editor;
-            } )
-            .catch( error => {
-                console.error( 'There was a problem initializing the editor.', error );
-            } );
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error)
+            });
     </script>
-
-<div id="output"></div>
-<!-- Load Babel -->
-<!-- v6 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<!-- Your custom script here -->
-<script type="text/babel">
-const getMessage = () => "Hello World";
-document.getElementById('output').innerHTML = getMessage();
-</script>
-
-
-<script src="https://cdn.ckbox.io/CKBox/2.0.0/ckbox.js"></script>
-		<script src="./dist/main.js"></script>
     <script>const numStars = 150; // Adjust the number of stars as needed
 
         for (let i = 0; i < numStars; i++) {
@@ -221,6 +205,6 @@ document.getElementById('output').innerHTML = getMessage();
         star.style.animationDelay = Math.random() * 5 + "s";
         document.body.appendChild(star);
         }
-</script>
+    </script>
 </body>
 </html>
