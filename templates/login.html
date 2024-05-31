@@ -136,11 +136,11 @@
         <form id="login-form">
             <div>
                 <label for="username">Email:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" placeholder="example@gmail.com" required>
             </div>
             <div>
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" placeholder="password123" required>
             </div>
             <button type="submit">Login</button>
         </form>
@@ -177,9 +177,6 @@
                 const data = await response.json();
                 alert(`Login failed: ${data.detail}`);
             }
-
-           
-
         });
 
         const numStars = 150; // Adjust the number of stars as needed
@@ -189,12 +186,12 @@
         }
 
         function createStar(index) {
-        const star = document.createElement("div");
-        star.classList.add("star");
-        star.style.top = Math.random() * 15 + "%";
-        star.style.left = Math.random() * 100 + "%";
-        star.style.animationDelay = Math.random() * 5 + "s";
-        document.body.appendChild(star);
+            const star = document.createElement("div");
+            star.classList.add("star");
+            star.style.top = Math.random() * 15 + "%";
+            star.style.left = Math.random() * 100 + "%";
+            star.style.animationDelay = Math.random() * 5 + "s";
+            document.body.appendChild(star);
         }
 
     </script>
