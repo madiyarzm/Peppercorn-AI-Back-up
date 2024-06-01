@@ -9,15 +9,16 @@
     <script defer src="/static/scripts/texteditor.js"></script>
     <style>
         body {
-        font-family: 'Inter', sans-serif;
-        background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%); /* Градиентный фон от светло-розового к темно-серому */
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        position: relative; /* Added to position .donthave */
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%); /* Градиентный фон от светло-розового к темно-серому */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative; /* Added to position .donthave */
+            height: auto;
         }
 
         body {
@@ -26,12 +27,12 @@
 
                 /* Stars */
         .star {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background-color: #fff;
-        border-radius: 50%;
-        animation: twinkle 2s infinite;
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
         }
 
         @keyframes twinkle {
@@ -45,6 +46,20 @@
             opacity: 0.3;
         }
         }
+
+        .container_out {
+            width: 800px;
+            border: 2px solid #8bf; /* Создание границы 2px с указанным цветом */
+            height: 420px;
+            padding: 40px;
+            margin-bottom: 5px;
+            background-color: #042551; /* Темно-серый фон для формы */
+            border-radius: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Углубленная тень для большего акцента */
+            position: relative; /* Added to position .donthave */
+            /* margin-top: 100px; Добавлено для отступа между формой и текстом */
+        }
+
         .container {
             width: 80%;
             margin: auto;
@@ -52,11 +67,12 @@
             background-color: #042551; /* Темно-серый фон для формы */
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
+            margin-top: 20px;
             color: #fff;
         }
         h1 {
-            margin-left: 100px;
+            margin-top: 90px;
+            margin-left: 200px;
             text-align: center;
             font-size: 30px;
             color: #8bf;
@@ -202,6 +218,58 @@
             border: 2px solid #007bff;
             background-color: rgb(86, 92, 160);
         }
+
+        .form-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .dropdown, .gender, .income, .sample-size {
+            display: flex;
+            align-items: center;
+        }
+
+        .gender label {
+            margin-left: 10px;
+        }
+
+        .income {
+            margin-left: 10px;
+        }
+
+        .income label {
+            margin-right: 5px;
+        }
+
+        .sample-size {
+            margin-left: 10px;
+        }
+
+        .sample-size label {
+            margin-right: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding-top: 10px;
+            margin-top: 10px;
+            padding: 10px 20px;
+            margin: 10px 5px; /* Slightly reduce horizontal margin */
+            font-size: 16px;
+            margin-right: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(7, 7, 7, 0.8); /* Slightly transparent dark grey */
+            background-color: #253259; /* Slightly transparent dark grey */
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            transform: translateY(-3px); /* Subtle lift effect */
+        }
     </style>
 </head>
 <body>
@@ -218,11 +286,37 @@
         </nav>
     </div>
     
-    <div>   
-        <h1>Let's Create an Email Prompt!</h1> 
-        <div class="editor_container">   
-            <div id="editor"></div>
+    <div class="wrapper">
+        <h1>Let's Create an Email Prompt!</h1>
+        <div class="container_out"> 
+            <div>   
+                <div class="form-controls">
+                    <div class="dropdown">
+                        <label for="user-type">Select User Type:</label>
+                        <select id="user-type">
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="entrepreneur">Entrepreneur</option>
+                        </select>
+                    </div>
+                    <div class="gender">
+                        <label>Gender:</label>
+                        <label><input type="radio" name="gender" value="male"> Male</label>
+                        <label><input type="radio" name="gender" value="female"> Female</label>
+                    </div>
+                    <div class="income">
+                        <label for="income-range">Income:</label>
+                        <input type="range" id="income-range" name="income-range" min="100" max="10000" step="100">
+                    </div>
+                </div>
+                <div class="editor_container">   
+                    <div id="editor"></div>
+                </div>
+                
+            </div>
+            
         </div>
+        <button class="btn">Generate</button>
     </div>
     <script src="/static/ckeditor5/ckeditor.js"></script>
     <script>
