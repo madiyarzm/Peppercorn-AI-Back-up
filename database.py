@@ -1,5 +1,5 @@
 from pymongo import MongoClient, ASCENDING
-from password_hashing import hash_password, verify_password
+from utils.password_hashing import hash_password, verify_password
 
 
 class DBManager:
