@@ -223,6 +223,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: -10px;
             margin-bottom: 10px;
         }
 
@@ -231,12 +232,36 @@
             align-items: center;
         }
 
+        .dropdown select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 1px;
+            background-color: #fff;
+            color: #333;
+            /* height: 1px;
+            width: 120px; /* decreased width of select dropdown */
+            font-size: 3px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="#333" d="M2 0L0 2h4z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px;
+            height: 3px; /* decreased height of select dropdown */
+        }
+
+        select{
+            width: 120px; /* decreased width of select dropdown */
+            height: 3px; /* decreased height of select dropdown */
+        }
+
         .gender label {
             margin-left: 10px;
         }
 
         .income {
-            margin-left: 10px;
+            margin-left: 5px;
         }
 
         .income label {
@@ -250,6 +275,8 @@
         .sample-size label {
             margin-right: 5px;
         }
+
+        
 
         .btn {
             display: inline-block;
@@ -292,13 +319,16 @@
             <div>   
                 <div class="form-controls">
                     <div class="dropdown">
-                        <label for="user-type">Select User Type:</label>
-                        <select id="user-type">
-                            <option value="student">Student</option>
-                            <option value="teacher">Teacher</option>
-                            <option value="entrepreneur">Entrepreneur</option>
+                        <label style="margin-right: 10px;">Select user type: </label>
+                        <select name="format" id="format">
+                           <option selected disabled>Choose from following</option>
+                           <option value="pdf">PDF</option>
+                           <option value="txt">txt</option>
+                           <option value="epub">ePub</option>
+                           <option value="fb2">fb2</option>
+                           <option value="mobi">mobi</option>
                         </select>
-                    </div>
+                     </div>
                     <div class="gender">
                         <label>Gender:</label>
                         <label><input type="radio" name="gender" value="male"> Male</label>
