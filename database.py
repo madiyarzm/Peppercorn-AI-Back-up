@@ -18,18 +18,16 @@ class DBManager:
         return self.clients_collection.find_one(username)
 
     def insert_user(self, user):
-        hashed_password, salt = hash_password(user["password"])
+        hashed_password = hash_password(user["password"])
         self.clients_collection.insert_one(
-            {"username": user["username"], "password": [hashed_password, salt]}
+            {"username": user["username"], "password": hashed_password}
         )
 
     def validate_user(self, user):
-
         user_record = self.clients_collection.find_one({"username": user["username"]})
         if user_record:
-            stored_hashed_password = user_record["password"][0]
-            stored_salt = user_record["password"][1]
-            if verify_password(user["password"], stored_hashed_password, stored_salt):
+            stored_hashed_password = user_record["password"]
+            if verify_password(user["password"], stored_hashed_password):
                 return user_record
 
     def insert_upload_record(self, data):
