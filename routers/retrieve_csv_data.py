@@ -53,7 +53,7 @@ async def use_data(request: Request, upload_id: str):
 
     # Convert the customer data into a list of dictionaries
     customers = [
-        {"name": row["name"], "email": row["email"], "income": row["income"], "age": row["age"], "gender": row["gender"], "city": row["city"], "hobby": row["hobby"], "category": row["category"]}
+        {"name": row["name"], "email": row["email"], "income": row["income"], "age": row["age"], "gender": row["gender"], "city": row["city"], "hobby": row["hobby"]}
         for row in customer_data
     ]
 
