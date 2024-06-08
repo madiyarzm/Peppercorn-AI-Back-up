@@ -5,3 +5,10 @@ __pycache__/
 commands.txt
 ToDo.txt
 customers.csv
+utils/openai_key.txt
+customer1.csv
+customer2.csv
+customer3.csv
+utils/test.py
+utils/test-gpt-3.5.py
+utils/customers_categorization.py
