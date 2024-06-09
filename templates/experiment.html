@@ -13,13 +13,16 @@
     }
 
     body {
-        font-family: Arial, sans-serif;
-        background-color: #1e1e1e;
-        color: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%); /* Градиентный фон от светло-розового к темно-серому */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative; /* Added to position .donthave */
+            height: auto;
     }
 
     .container {
@@ -108,6 +111,18 @@
     }
 </style>
 <body>
+     <!-- <div class="header"></div> -->
+     <div class="container1">
+        <nav class="shift">
+            <ul>
+                <li><a href="/main">HOME</a></li>
+                <li><a href="/customer-list">CUSTOMER LIST</a></li>
+                <li><a href="/send-email">SEND EMAIL</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
     <div class="container">
         <header class="header">
             <h1>Новый GPT</h1>
