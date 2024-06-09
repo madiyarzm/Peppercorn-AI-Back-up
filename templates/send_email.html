@@ -1,381 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Email</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script defer src="/static/scripts/texteditor.js"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at 50.2% -175%, rgb(14, 72, 222) 5.2%, #010a1d 75.3%); /* Градиентный фон от светло-розового к темно-серому */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative; /* Added to position .donthave */
-            height: auto;
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send Emails</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* Stars */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background-color: #fff;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
 
-        body {
-            background-color: #000000;
-        }
+    h1 {
+      font-size: 30px;
+      color: #8bf;
+    }
+    h2{
+        font-size: 30px;
+        color: #8bf;
+    }
 
-                /* Stars */
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: #fff;
-            border-radius: 50%;
-            animation: twinkle 2s infinite;
-        }
+    /* h1 {
+      border-right: solid 5px rgba(255, 255, 255, 0.75);
+      white-space: nowrap;
+      overflow: hidden;
+    } */
 
-        @keyframes twinkle {
-        0% {
-            opacity: 0;
-        }
-        50% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0.3;
-        }
-        }
+    /* Animation */
+    /* h1 {
+      animation: animated-text 2s linear 1s 1 normal both,
+        animated-cursor 600ms linear infinite;
+    } */
 
-        .container_out {
-            width: 800px;
-            border: 2px solid #8bf; /* Создание границы 2px с указанным цветом */
-            height: 420px;
-            padding: 40px;
-            margin-bottom: 5px;
-            background-color: #042551; /* Темно-серый фон для формы */
-            border-radius: 30px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Углубленная тень для большего акцента */
-            position: relative; /* Added to position .donthave */
-            /* margin-top: 100px; Добавлено для отступа между формой и текстом */
-        }
+    @keyframes twinkle {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.3;
+      }
+    }
 
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            background-color: #042551; /* Темно-серый фон для формы */
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            color: #fff;
-        }
-        h1 {
-            margin-top: 90px;
-            margin-left: 200px;
-            text-align: center;
-            font-size: 30px;
-            color: #8bf;
-        }
+    body {
+      font-family: "Inter", sans-serif;
+      background: radial-gradient(
+        circle at 50.2% -175%,
+        rgb(14, 72, 222) 5.2%,
+        #010a1d 75.3%
+      ); /* Градиентный фон от светло-розового к темно-серому */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative; /* Added to position .donthave */
+    }
 
-        h1 {
-            border-right: solid 5px rgba(255,255,255,.75);
-            white-space: nowrap;
-            overflow: hidden;    
-        }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      height: 600px;
+      max-width: 1200px;
+      background-color: #2e2e2e;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 100px;
+    }
 
-            /* Animation */
-        h1 {
-            animation: animated-text 2s linear 1s 1 normal both,
-            animated-cursor 600ms linear infinite;
-        }
+    .header {
+      padding: 10px;
+      background-color: #3e3e3e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #555;
+    }
 
-            /* text animation */
+    .main {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+    }
 
-        @keyframes animated-text{
-            from{width: 0;}
-            to{width: 456px;}
-        }
+    .left-panel,
+    .right-panel {
+      padding: 20px;
+    }
 
-            /* cursor animations */
+    .left-panel {
+      width: 50%;
+      border-right: 1px solid #555;
+    }
 
-        @keyframes animated-cursor{
-            from{border-right-color: rgba(255,255,255,.75);}
-            to{border-right-color: transparent;}
-        }
+    .right-panel {
+      width: 50%;
+    }
 
+    .create-button,
+    .config-button,
+    .attach-button {
+      display: block;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #4e4e4e;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-        label {
-            font-weight: bold;
-            color: white;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+    .create-button:hover,
+    .config-button:hover,
+    .attach-button:hover {
+      background-color: #5e5e5e;
+    }
 
-        .container1 {
-            width: 100%;
-            padding: 18px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-right: 10px;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+    .message-box {
+      margin-top: 20px;
+      background-color: #3e3e3e;
+      padding: 15px;
+      border-radius: 4px;
+    }
 
-        .container1 li {
-            list-style: none;
-            margin-left: 85px;
-            text-align: center;
-            display: inline;
-        }
+    .input-box {
+      margin-top: 20px;
+    }
 
-        .container1 li a {
-            text-decoration: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 4px;
-            color: #f2f2f2;
-            display: inline-block;
-            text-align: center;
-            letter-spacing: 1px;
-            transition: all .3s ease-in;
-            font-family: "Inter", sans-serif;
-        }
+    .right-panel h2 {
+      margin-bottom: 20px;
+    }
 
-        .container1 li a:hover {
-            background-color: #DDFFD9;
-            background-color: #091e9627;
-            color: rgb(210, 210, 210);
-        }
+    .preview-box {
+      background-color: #3e3e3e;
+      border: 1px solid #555;
+      border-radius: 8px;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-   
-            /* SHIFT */
-        nav.shift ul li a {
-            position:relative;
-            z-index: 1;
-        }
-        nav.shift ul li a:hover {
-            color: #ffffff;
-            font-size: 20px;
-        }
-        nav.shift ul li a:after {
-            display: block;
-            position: absolute;
-            top: 0;
-            border-radius: 3px;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            margin: auto;
-            width: 100%;
-            height: 1px;
-            content: '.';
-            color: transparent;
-            /* background: #0823ba; */
-            visibility: none;
-            opacity: 0;
-            z-index: -1;
-        }
-        nav.shift ul li a:hover:after {
-            opacity: 1;
-            visibility: visible;
-            height: 100%;
-        }
-        .editor_container{
-            margin-left: 10%;
-            border: 6px solid rgb(13, 62, 127);
-            border-radius: 10px;
-            width:100%;
-            max-width: 800px;
-            margin:0 auto;
-            height: 400px; /* Set a fixed height */
-            overflow-y: auto; /* Make it scrollable */
-        }
+    .preview-icon {
+      width: 50px;
+      height: 50px;
+      background-color: #555;
+      border-radius: 50%;
+    }
 
-        .ck-editor__editable {
-            height: 60vh;
-            border: 2px solid #007bff;
-            background-color: rgb(86, 92, 160);
-        }
+    .container1 {
+      width: 100%;
+      padding: 18px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-right: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-bottom: 100px;
+    }
 
-        .form-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: -10px;
-            margin-bottom: 10px;
-        }
+    .container1 li {
+      list-style: none;
+      margin-left: 85px;
+      text-align: center;
+      display: inline;
+    }
 
-        .dropdown, .gender, .income, .sample-size {
-            display: flex;
-            align-items: center;
-        }
+    .container1 li a {
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      color: #f2f2f2;
+      display: inline-block;
+      text-align: center;
+      letter-spacing: 1px;
+      transition: all 0.3s ease-in;
+      font-family: "Inter", sans-serif;
+    }
 
-        .dropdown select {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 1px;
-            background-color: #fff;
-            color: #333;
-            /* height: 1px;
-            width: 120px; /* decreased width of select dropdown */
-            font-size: 15px;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="#333" d="M2 0L0 2h4z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 10px;
-            height: 3px; /* decreased height of select dropdown */
-        }
+    .container1 li a:hover {
+      background-color: #ddffd9;
+      background-color: #091e9627;
+      color: rgb(210, 210, 210);
+    }
 
-        select{
-            width: 120px; /* decreased width of select dropdown */
-            height: 3px; /* decreased height of select dropdown */
-        }
+    /* SHIFT */
+    nav.shift ul li a {
+      position: relative;
+      z-index: 1;
+    }
+    nav.shift ul li a:hover {
+      color: #ffffff;
+      font-size: 20px;
+    }
+    nav.shift ul li a:after {
+      display: block;
+      position: absolute;
+      top: 0;
+      border-radius: 3px;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      width: 100%;
+      height: 1px;
+      content: ".";
+      color: transparent;
+      /* background: #0823ba; */
+      visibility: none;
+      opacity: 0;
+      z-index: -1;
+    }
+    nav.shift ul li a:hover:after {
+      opacity: 1;
+      visibility: visible;
+      height: 100%;
+    }
+    .wrapper {
+      margin-top: 100px;
+    }
+    .editor_container {
+      margin-left: 10%;
+      border: 6px solid rgb(13, 62, 127);
+      border-radius: 10px;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      height: 400px; /* Set a fixed height */
+      overflow-y: auto; /* Make it scrollable */
+    }
 
-        .gender label {
-            margin-left: 10px;
-        }
-
-        .income {
-            margin-left: 5px;
-        }
-
-        .income label {
-            margin-right: 5px;
-        }
-
-        .sample-size {
-            margin-left: 10px;
-        }
-
-        .sample-size label {
-            margin-right: 5px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding-top: 10px;
-            margin-top: 10px;
-            padding: 10px 20px;
-            margin: 10px 5px; /* Slightly reduce horizontal margin */
-            font-size: 16px;
-            margin-right: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(7, 7, 7, 0.8); /* Slightly transparent dark grey */
-            background-color: #253259; /* Slightly transparent dark grey */
-            color: #fff;
-            text-decoration: none;
-            transition: background-color 0.3s, transform 0.3s;
-            transform: translateY(-3px); /* Subtle lift effect */
-        }
-    </style>
-</head>
-<body>
+    .ck-editor__editable {
+      height: 60vh;
+      border: 2px solid #007bff;
+      background-color: rgb(86, 92, 160);
+    }
+  </style>
+  <body>
     <!-- <div class="header"></div> -->
     <div class="container1">
-        <nav class="shift">
-            <ul>
-                <li><a href="/main">HOME</a></li>
-                <li><a href="/customer-list">CUSTOMER LIST</a></li>
-                <li><a href="/send-email">SEND EMAIL</a></li>
-                <li><a href="#">ABOUT</a></li>
-                <li><a href="#">CONTACT</a></li>
-            </ul>
-        </nav>
+      <nav class="shift">
+        <ul>
+          <li><a href="/main">HOME</a></li>
+          <li><a href="/customer-list">CUSTOMER LIST</a></li>
+          <li><a href="/send-email">SEND EMAIL</a></li>
+          <li><a href="#">ABOUT</a></li>
+          <li><a href="#">CONTACT</a></li>
+        </ul>
+      </nav>
     </div>
-    
+
     <div class="wrapper">
-        <h1>Let's Create an Email Prompt!</h1>
-        <div class="container_out"> 
-            <div>   
-                <div class="form-controls">
-                    <div class="dropdown">
-                        <label style="margin-right: 10px;">Select user type: </label>
-                        <select name="format" id="format">
-                           <option selected disabled>Choose from following</option>
-                           <option value="pdf">Doctors</option>
-                           <option value="txt">Lawyers</option>
-                           <option value="epub">Enterpreneurs</option>
-                           <option value="fb2">Teachers</option>
-                           <option value="mobi">Students</option>
-                           <option value="mobi">Start-upers</option>
-                           <option value="mobi">VC founders</option>
-                           <option value="mobi">Event-organizers</option>
-                        </select>
-                     </div>
-                    <div class="gender">
-                        <label>Gender:</label>
-                        <label><input type="radio" name="gender" value="male"> Male</label>
-                        <label><input type="radio" name="gender" value="female"> Female</label>
-                    </div>
-                    <div class="income">
-                        <label for="income-range">Income:</label>
-                        <input type="range" id="income-range" name="income-range" min="100" max="10000" step="100">
-                    </div>
-                </div>
-                <div class="editor_container">   
-                    <div id="editor"></div>
-                </div>
-                
-            </div>
-            
+      <header class="header">
+        <h1>Prompt Editor</h1>
+        <span>---</span>
+      </header>
+      <main class="main">
+        <div class="left-panel">
+          <button class="create-button">Create</button>
+          <button class="config-button">Save</button>
+          <div class="editor_container">
+            <div id="editor"></div>
+          </div>
         </div>
-        <button class="btn">Generate</button>
+        <div class="right-panel">
+          <h2>Preview</h2>
+          <div class="preview-box">
+            <div class="preview-icon"></div>
+          </div>
+        </div>
+      </main>
     </div>
-    <script src="/static/ckeditor5/ckeditor.js"></script>
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error)
-            });
+      const numStars = 150; // Adjust the number of stars as needed
 
-            setTimeout(() => {
-                document.body.classList.remove('animated-cursor');
-                // document.body.classList.add('static-cursor');
-            }, 4000);
-    </script>
-    <script>const numStars = 150; // Adjust the number of stars as needed
-
-        for (let i = 0; i < numStars; i++) {
+      for (let i = 0; i < numStars; i++) {
         createStar(i);
-        }
+      }
 
-        function createStar(index) {
+      function createStar(index) {
         const star = document.createElement("div");
         star.classList.add("star");
-        star.style.top = Math.random() * 15 + "%";
+        star.style.top = Math.random() * 10 + "%";
         star.style.left = Math.random() * 100 + "%";
         star.style.animationDelay = Math.random() * 5 + "s";
         document.body.appendChild(star);
-        }
+      }
     </script>
-</body>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
+        console.error(error);
+      });
+    
+      setTimeout(() => {
+        document.body.classList.remove("animated-cursor");
+        // document.body.classList.add('static-cursor');
+      }, 4000);
+    </script>
+    
+  </body>
 </html>
