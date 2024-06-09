@@ -35,12 +35,12 @@
     }
 
     h1 {
-      font-size: 30px;
+      font-size: 20px;
       color: #8bf;
     }
-    h2{
-        font-size: 30px;
-        color: #8bf;
+    h2 {
+      font-size: 30px;
+      color: #8bf;
     }
 
     /* h1 {
@@ -88,7 +88,7 @@
       width: 90%;
       height: 600px;
       max-width: 1200px;
-      background-color: #2e2e2e;
+      background-color: #063068;
       border-radius: 8px;
       overflow: hidden;
       margin-bottom: 100px;
@@ -96,7 +96,7 @@
 
     .header {
       padding: 10px;
-      background-color: #3e3e3e;
+      background-color: #042551;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -107,6 +107,10 @@
       display: flex;
       flex-direction: row;
       height: 100%;
+    }
+
+    .left-panel {
+      background-color: #042551;
     }
 
     .left-panel,
@@ -124,12 +128,14 @@
     }
 
     .create-button,
+    .switch-button,
     .config-button,
     .attach-button {
+      margin-top: 20px;
       display: block;
       margin-bottom: 10px;
       padding: 10px;
-      background-color: #4e4e4e;
+      background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -137,9 +143,10 @@
     }
 
     .create-button:hover,
+    .switch-button:hover,
     .config-button:hover,
     .attach-button:hover {
-      background-color: #5e5e5e;
+      background-color: #0056b3;
     }
 
     .message-box {
@@ -155,11 +162,12 @@
 
     .right-panel h2 {
       margin-bottom: 20px;
+      text-align: center;
     }
 
     .preview-box {
       background-color: #3e3e3e;
-      border: 1px solid #555;
+      border: 6px solid rgb(13, 62, 127);
       border-radius: 8px;
       height: 400px;
       display: flex;
@@ -246,12 +254,12 @@
       height: 100%;
     }
     .wrapper {
-      margin-top: 100px;
+      margin-top: 70px;
     }
     .editor_container {
       margin-left: 10%;
       border: 6px solid rgb(13, 62, 127);
-      border-radius: 10px;
+      border-radius: 5px;
       width: 100%;
       max-width: 800px;
       margin: 0 auto;
@@ -264,6 +272,28 @@
       border: 2px solid #007bff;
       background-color: rgb(86, 92, 160);
     }
+    .form-controls {
+      margin-top: 20px;
+      color: white;
+      font-size: 20px;
+    }
+
+    .dropdown,
+    .gender,
+    .income {
+      margin-bottom: 20px;
+    }
+
+    .switch-button {
+      display: block;
+      margin-top: 20px;
+      padding: 10px;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
   </style>
   <body>
     <!-- <div class="header"></div> -->
@@ -286,11 +316,52 @@
       </header>
       <main class="main">
         <div class="left-panel">
-          <button class="create-button">Create</button>
-          <button class="config-button">Save</button>
           <div class="editor_container">
-            <div id="editor"></div>
+            <div id="editor" class="ck-editor__editable"></div>
           </div>
+          <div class="form-controls" id="formControls" style="display: none">
+            <div class="dropdown">
+              <label style="margin-right: 10px">Select user type: </label>
+              <select name="format" id="format">
+                <option selected disabled>Choose from following</option>
+                <option value="pdf">Doctors</option>
+                <option value="txt">Lawyers</option>
+                <option value="epub">Enterpreneurs</option>
+                <option value="fb2">Teachers</option>
+                <option value="mobi">Students</option>
+                <option value="mobi">Start-upers</option>
+                <option value="mobi">VC founders</option>
+                <option value="mobi">Event-organizers</option>
+              </select>
+            </div>
+            <div class="gender">
+              <label>Gender:</label>
+              <label
+                ><input type="radio" name="gender" value="male" /> Male</label
+              >
+              <label
+                ><input type="radio" name="gender" value="female" />
+                Female</label
+              >
+            </div>
+            <div class="income">
+              <label for="income-range">Income:</label>
+              <input
+                type="range"
+                id="income-range"
+                name="income-range"
+                min="100"
+                max="10000"
+                step="100"
+              />
+            </div>
+            
+          </div>
+
+          <button class="switch-button" onclick="showEditor()">
+            Edit Prompt
+          </button>
+          <button class="config-button">Edit Parameters</button>
         </div>
         <div class="right-panel">
           <h2>Preview</h2>
@@ -301,7 +372,7 @@
       </main>
     </div>
     <script>
-      const numStars = 150; // Adjust the number of stars as needed
+      const numStars = 100; // Adjust the number of stars as needed
 
       for (let i = 0; i < numStars; i++) {
         createStar(i);
@@ -310,7 +381,7 @@
       function createStar(index) {
         const star = document.createElement("div");
         star.classList.add("star");
-        star.style.top = Math.random() * 10 + "%";
+        star.style.top = Math.random() * 7 + "%";
         star.style.left = Math.random() * 100 + "%";
         star.style.animationDelay = Math.random() * 5 + "s";
         document.body.appendChild(star);
@@ -318,6 +389,18 @@
     </script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
     <script>
+      function showEditor() {
+        document.getElementById('formControls').style.display = 'none';
+        document.querySelector('.editor_container').style.display = 'block';
+      }
+    
+      function showFormControls() {
+        document.getElementById('formControls').style.display = 'block';
+        document.querySelector('.editor_container').style.display = 'none';
+      }
+    
+      document.querySelector('.config-button').addEventListener('click', showFormControls);
+    
       ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
         console.error(error);
       });
