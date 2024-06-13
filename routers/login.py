@@ -1,7 +1,8 @@
-from fastapi import APIRouter, HTTPException, Request, status, Cookie, Response
+from fastapi import APIRouter, HTTPException, Request, status, Cookie
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 from database import DBManager
+from schemas.business_context import BusinessContext
 from schemas.user_credentials import UserCredentials, UserCredentialsLogin
 import os
 
@@ -79,6 +80,29 @@ async def customer_list(
         raise HTTPException(status_code=401, detail="Unauthorized access")
 
     customers = existing_user.get("customers", [])
+    logged_in = existing_user.get("logged-in", False)
+
     return templates.TemplateResponse(
-        "customer_list.html", {"request": request, "customer_data": customers}
+        "customer_list.html", {"request": request, "customer_data": customers, "logged_in": logged_in}
     )
+
+@login_router.post("/customer-list")
+async def save_business_context(
+    request: Request,
+    context: BusinessContext,
+    username: str = Cookie(None)
+    
+):
+    if username is None:
+        raise HTTPException(status_code=401, detail="Unauthorized access")
+
+    # Save the business context
+    DB_Manager.save_business_context(username, context.dict())
+
+    # Update the logged-in status
+    DB_Manager.clients_collection.update_one(
+        {"username": username},
+        {"$set": {"logged-in": True}}
+    )
+
+    return RedirectResponse(url="/customer-list", status_code=303)
