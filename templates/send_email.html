@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Send Emails</title>
+    <!-- <link rel="stylesheet" href="/static/send_email_static.scss"> -->
   </head>
   <style>
     * {
@@ -89,7 +90,7 @@
       height: 600px;
       max-width: 1200px;
       background-color: #063068;
-      border-radius: 8px;
+      /* border-radius: 8px; */
       overflow: hidden;
       margin-bottom: 100px;
     }
@@ -168,9 +169,9 @@
     .preview-box {
       background-color: #3e3e3e;
       border: 6px solid rgb(13, 62, 127);
-      border-radius: 8px;
+      /* border-radius: 8px; */
       height: 400px;
-      display: flex;
+      /* display: flex; */
       justify-content: center;
       align-items: center;
     }
@@ -179,7 +180,7 @@
       width: 50px;
       height: 50px;
       background-color: #555;
-      border-radius: 50%;
+      /* border-radius: 50%; */
     }
 
     .container1 {
@@ -294,6 +295,316 @@
       cursor: pointer;
     }
 
+    /*==================
+    Base Styles
+===================*/
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .container {
+      background-color: #0056b3;
+      position: relative;
+      height: 80%;
+      width: 525px;
+      padding: 2em;
+    }
+
+    .slide-wrapper {
+      position: relative;
+      margin: 0 auto;
+      padding: 3em;
+      width: 100%;
+      height: 300px;
+      border-radius: 20px;
+      box-shadow: 0px 1px 2px 0px rgb(53, 53, 53);
+      overflow: hidden;
+    }
+
+    /*==================
+    Slides
+===================*/
+
+    #slide-role {
+      background: inherit;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 500%;
+      height: 100%;
+      z-index: 100;
+      transition: left 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+      /* flex */
+      display: flex;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* backgrounds */
+    /* 
+.slide-1 {
+    background-image: url("https://images.pexels.com/photos/1562/italian-landscape-mountains-nature.jpg?auto=compress&cs=tinysrgb&h=650&w=940");
+}
+
+.slide-2 {
+    background-image: url("https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&h=650&w=940");
+}
+
+.slide-3 {
+    background-image: url("https://images.pexels.com/photos/448714/pexels-photo-448714.jpeg?auto=compress&cs=tinysrgb&h=650&w=940");
+}
+
+.slide-4 {
+    background-image: url("https://images.pexels.com/photos/38136/pexels-photo-38136.jpeg?auto=compress&cs=tinysrgb&h=650&w=940");
+} */
+
+    /*===================
+    BUTTONS
+====================*/
+
+    .btn,
+    .btn::after {
+      border-radius: 50%;
+      transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+
+    .btn {
+      border: 1px solid rgba(0, 0, 0, 0.281);
+      background: rgb(255, 255, 255);
+      box-shadow: 0px 2px 2px rgba(56, 56, 56, 0.822);
+      position: absolute;
+      bottom: 12%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      transform: scale(1.1);
+      z-index: 1000;
+    }
+
+    .btn:nth-of-type(1) {
+      left: 38%;
+    }
+
+    .btn:nth-of-type(2) {
+      left: 45%;
+    }
+
+    .btn:nth-of-type(3) {
+      left: 52%;
+    }
+
+    .btn:nth-of-type(4) {
+      left: 59%;
+    }
+
+    .btn:hover {
+      transform: scale(1.4);
+    }
+
+    /* buttons Atom! */
+
+    .btn::after {
+      content: "";
+      display: inline-block;
+      border: 1px solid white;
+      background: rgb(11, 185, 238);
+      width: 20px;
+      height: 20px;
+      margin: 3px 3px;
+      transform: scale(0.5, 0.5);
+      box-shadow: 0px 1px 5px rgba(56, 56, 56, 0.822);
+    }
+
+    /*====================
+        L O G I C 
+ ===================*/
+
+    /* slide logic */
+
+    input[type="radio"]:checked#slide-2-trigger
+      ~ div.slide-wrapper
+      > div#slide-role {
+      left: -100%;
+    }
+
+    input[type="radio"]:checked#slide-3-trigger
+      ~ div.slide-wrapper
+      > div#slide-role {
+      left: -200%;
+    }
+
+    input[type="radio"]:checked#slide-4-trigger
+      ~ div.slide-wrapper
+      > div#slide-role {
+      left: -300%;
+    }
+
+    /* button logic */
+
+    input[type="radio"]:checked + label.btn {
+      transform: scale(1.2);
+      border: 1px solid rgba(53, 53, 53, 0.308);
+    }
+
+    input[type="radio"]:checked + label.btn::after {
+      transform: scale(1.1, 1.1);
+      background: lightskyblue;
+    }
+
+    /*=====================================================================================
+                MEDIA QUERIES
+=======================================================================================*/
+
+    @media only screen and (max-width: 750px) {
+      .slide-wrapper {
+        /* width: 300px;
+        height: 100%; */
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px; /* Add some space between the editors */
+      }
+      .btn:nth-of-type(1) {
+        left: 93%;
+        bottom: 60%;
+      }
+      .btn:nth-of-type(2) {
+        left: 93%;
+        bottom: 50%;
+      }
+      .btn:nth-of-type(3) {
+        left: 93%;
+        bottom: 40%;
+      }
+      .btn:nth-of-type(4) {
+        left: 93%;
+        bottom: 30%;
+      }
+    }
+
+    @media only screen and (max-width: 450px) {
+      .btn:nth-of-type(1) {
+        left: 91%;
+      }
+      .btn:nth-of-type(2) {
+        left: 91%;
+      }
+      .btn:nth-of-type(3) {
+        left: 91%;
+      }
+      .btn:nth-of-type(4) {
+        left: 91%;
+      }
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 1000px;
+      position: relative;
+      margin: auto;
+    }
+
+    /* Hide the images by default */
+    .mySlides {
+      display: none;
+    }
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      margin-top: -22px;
+      padding: 16px;
+      color: rgb(16, 46, 177);
+      font-weight: bold;
+      font-size: 24px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover,
+    .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Caption text */
+    .text {
+      color: #2824af;
+      font-weight: bolder;
+      font-size: 15px;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active,
+    .dot:hover {
+      background-color: #717171;
+    }
+
+    /* Fading animation */
+    .fade {
+      animation-name: fade;
+      animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0.4;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   </style>
   <body>
     <!-- <div class="header"></div> -->
@@ -317,11 +628,13 @@
       <main class="main">
         <div class="left-panel">
           <div class="editor_container">
-            <div id="editor" class="ck-editor__editable"></div>
+            <div id="editor" class="ck-editor__editable">
+                <textarea>asdfasdf</textarea>
+            </div>
           </div>
           <div class="form-controls" id="formControls" style="display: none">
-            <div class="dropdown">
-              <label style="margin-right: 10px">Select user type: </label>
+            <!-- <div class="dropdown"> -->
+              <!-- <label style="margin-right: 10px">Select user type: </label>
               <select name="format" id="format">
                 <option selected disabled>Choose from following</option>
                 <option value="pdf">Doctors</option>
@@ -354,8 +667,10 @@
                 max="10000"
                 step="100"
               />
-            </div>
-            
+            </div> -->
+            <div class="editor_container">
+                <div id="editor_prompt" class="ck-editor__editable"></div>
+              </div>
           </div>
 
           <button class="switch-button" onclick="showEditor()">
@@ -363,11 +678,61 @@
           </button>
           <button class="config-button">Edit Parameters</button>
         </div>
+
         <div class="right-panel">
           <h2>Preview</h2>
-          <div class="preview-box">
-            <div class="preview-icon"></div>
-          </div>
+          <!-- <div class="preview-box"> -->
+            -->
+            <!-- Slideshow container -->
+            <div class="slideshow-container" style="margin-top: -30px;">
+              <!-- Full-width images with number and caption text -->
+              <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <div class="editor_container">
+                    <div id="editor1" class="ck-editor__editable"></div>
+                  </div>
+                <div class="text">Shorter Version</div>
+              </div>
+
+              <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <div class="editor_container">
+                    <div id="editor2" class="ck-editor__editable"></div>
+                  </div>
+                <div class="text">Longer Version</div>
+              </div>
+
+              <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <div class="editor_container">
+                    <div id="editor3" class="ck-editor__editable"></div>
+                  </div>
+                <div class="text">More Formal Version</div>
+              </div>
+
+              <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <div class="editor_container">
+                    <div id="editor4" class="ck-editor__editable"></div>
+                  </div>
+                <div class="text">More Informal Version</div>
+              </div>
+
+              <!-- Next and previous buttons -->
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br />
+
+            <!-- The dots/circles -->
+            <div style="text-align: center">
+              <span class="dot" onclick="currentSlide(1)"></span>
+              <span class="dot" onclick="currentSlide(2)"></span>
+              <span class="dot" onclick="currentSlide(3)"></span>
+              <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+          <!-- </div> -->
+          
         </div>
       </main>
     </div>
@@ -390,26 +755,90 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
     <script>
       function showEditor() {
-        document.getElementById('formControls').style.display = 'none';
-        document.querySelector('.editor_container').style.display = 'block';
+        document.getElementById("formControls").style.display = "none";
+        document.querySelector(".editor_container").style.display = "block";
       }
-    
+
       function showFormControls() {
-        document.getElementById('formControls').style.display = 'block';
-        document.querySelector('.editor_container').style.display = 'none';
+        document.getElementById("formControls").style.display = "block";
+        document.querySelector(".editor_container").style.display = "none";
       }
-    
-      document.querySelector('.config-button').addEventListener('click', showFormControls);
-    
+
+      document
+        .querySelector(".config-button")
+        .addEventListener("click", showFormControls);
+
       ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
         console.error(error);
       });
-    
+
+      ClassicEditor.create(document.querySelector("#editor1")).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+
+      ClassicEditor.create(document.querySelector("#editor2")).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+
+      ClassicEditor.create(document.querySelector("#editor3")).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+
+      ClassicEditor.create(document.querySelector("#editor4")).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+
+      ClassicEditor.create(document.querySelector("#editor_prompt")).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+
       setTimeout(() => {
         document.body.classList.remove("animated-cursor");
         // document.body.classList.add('static-cursor');
       }, 4000);
+
+      let slideIndex = 1;
+      showSlides(slideIndex);
+
+      // Next/previous controls
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      // Thumbnail image controls
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+      }
     </script>
-    
   </body>
 </html>
