@@ -20,7 +20,7 @@ class DBManager:
     def insert_user(self, user):
         hashed_password = hash_password(user["password"])
         self.clients_collection.insert_one(
-            {"username": user["username"], "password": hashed_password}
+            {"username": user["username"], "password": hashed_password, "logged-in": False}
         )
 
     def validate_user(self, user):
@@ -28,7 +28,17 @@ class DBManager:
         if user_record:
             stored_hashed_password = user_record["password"]
             if verify_password(user["password"], stored_hashed_password):
+                # self.clients_collection.update_one(
+                #     {"username": user["username"]},
+                #     {"$set": {"logged-in": True}}
+                # )
                 return user_record
+
+    def save_business_context(self, username, context):
+        self.clients_collection.update_one(
+            {"username": username},
+            {"$set": {"business_context": context}}
+        )
 
     def insert_upload_record(self, data):
         return self.clients_uploads_collection.insert_one(data)
