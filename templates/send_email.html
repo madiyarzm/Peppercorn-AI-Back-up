@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Send Emails</title>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
     <!-- <link rel="stylesheet" href="/static/send_email_static.scss"> -->
   </head>
   <style>
@@ -274,7 +276,6 @@
       background-color: rgb(86, 92, 160);
     }
     .form-controls {
-      
       font-size: 15px;
     }
 
@@ -293,7 +294,7 @@
       border-radius: 4px;
       cursor: pointer;
     }
-  
+
     /* Slideshow container */
     .slideshow-container {
       max-width: 1000px;
@@ -388,12 +389,11 @@
       }
     }
 
-
     /*style.css*/
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* * {
+    /* * {
 box-sizing: border-box;
 margin: 0;
 padding: 0;
@@ -406,130 +406,169 @@ font-style: normal;
 background-color: #f7f7f7;
 } */
 
-.chatBot {
-border: 3px solid #143077;
+    .chatBot {
+      border: 3px solid #143077;
 
-margin-top: -30px;
-margin-bottom: 20px;
-border-radius: 10px;
-margin: 30px auto;
-overflow: hidden;
-width: 500px;
-overflow-y: clip;
-height: 513px;
-background: rgb(255, 255, 255) ;
-background-size: contain;
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-background-repeat: no-repeat;
-background-position: center;
+      margin-top: -30px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      margin: 30px auto;
+      overflow: hidden;
+      width: 500px;
+      overflow-y: clip;
+      height: 513px;
+      background: rgb(255, 255, 255);
+      background-size: contain;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    header {
+      background-color: #0f207f;
+      text-align: center;
+      padding: 0px 0;
+      border-radius: 7px 7px 0 0;
+    }
+
+    header h2 {
+      color: #fff;
+      margin: 0;
+    }
+
+    .chatbox {
+      padding: 15px;
+      list-style: none;
+      overflow-y: auto;
+      height: 300px;
+    }
+
+    .chatbox li {
+      margin-bottom: 10px;
+    }
+
+    .chat p {
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+
+    .chat-outgoing p {
+      background-color: #162887;
+      align-self: flex-end;
+      color: #fff;
+    }
+
+    .chat-incoming p {
+      background-color: #eaeaea;
+    }
+
+    .chat-input {
+      padding: 10px;
+      border-top: 1px solid #ccc;
+    }
+
+    .chat-input textarea {
+      width: 522px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      resize: none;
+      outline: none;
+      overflow-y: scroll;
+      background-color: #dcdcdc85;
+      font-size: 16px;
+      color: rgb(0, 0, 0);
+      font-weight: 600;
+      margin-top: -10px;
+      margin-left: -15px;
+      height: 71px;
+    }
+
+    #cross {
+      float: right;
+      position: relative;
+      top: -38px;
+      left: -15px;
+      cursor: pointer;
+      color: white;
+      font-weight: bolder;
+      font-size: 28px;
+    }
+
+    #cross:hover {
+      color: red;
+      transition: all 0.5s;
+    }
+
+    .chatbox .chat p.error {
+      color: #ffffff;
+      background-color: #ff3737e8;
+    }
+
+    #sendBTN {
+      width: 100%;
+      padding: 8px;
+      border: 0;
+      outline: none;
+      font-size: 20px;
+      font-weight: 600;
+      border-radius: 7px;
+      background-color: #2a37ea;
+      cursor: pointer;
+      color: white;
+      margin-top: 12px;
+    }
+
+    .lastMessage {
+      margin-top: 50px;
+      font-size: 35px;
+      font-weight: 600;
+      color: darkgreen;
+      margin-left: 550px;
+    }
+
+    .welcome-back {
+  margin: 35px auto;
+  background: #ccc;
+  border-radius: 12px;
+  padding: 25px;
 }
-
-header {
-background-color: #0f207f;
-text-align: center;
-padding: 0px 0;
-border-radius: 7px 7px 0 0;
+.welcome-back h2 {
+  margin: 0 0 35px;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: normal;
 }
-
-header h2 {
-color: #fff;
-margin: 0;
+.welcome-back button {
+  font-size: 2em;
+  background: #20232a;
+  color: rgb(97, 218, 251);
+  border: none;
+  padding: 15px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  cursor: pointer;
+  display: block;
+  border-radius: 12px;
+  transition: 0.3s;
 }
-
-.chatbox {
-    
-padding: 15px;
-list-style: none;
-overflow-y: auto;
-height: 300px;
+.welcome-back button:hover {
+  color: #fff;
+  background: #000;
 }
-
-.chatbox li {
-margin-bottom: 10px;
+.welcome-back > p {
+  font-size: 1.2em;
+  text-align: center;
+  margin: 0 0 25px;
+  color: #980000;
 }
-
-.chat p {
-padding: 10px;
-border-radius: 10px;
-max-width: 70%;
-word-wrap: break-word;
+.welcome-back p.downloading {
+  font-size: 2em;
+  color: #333;
 }
-
-.chat-outgoing p {
-background-color: #162887;
-align-self: flex-end;
-color: #fff;
-}
-
-.chat-incoming p {
-background-color: #eaeaea;
-}
-
-.chat-input {
-padding: 10px;
-border-top: 1px solid #ccc;
-}
-
-.chat-input textarea {
-width: 522px;
-padding: 10px;
-border: 1px solid #ccc;
-border-radius: 7px;
-resize: none;
-outline: none;
-overflow-y: scroll;
-background-color: #dcdcdc85;
-font-size: 16px;
-color: rgb(0, 0, 0);
-font-weight: 600;
-margin-top: -10px;
-margin-left: -15px;
-height: 71px;
-}
-
-#cross {
-float: right;
-position: relative;
-top: -38px;
-left: -15px;
-cursor: pointer;
-color: white;
-font-weight: bolder;
-font-size: 28px;
-}
-
-#cross:hover {
-color: red;
-transition: all .5s;
-}
-
-.chatbox .chat p.error {
-color: #ffffff;
-background-color: #ff3737e8;
-}
-
-#sendBTN {
-width: 100%;
-padding: 8px;
-border: 0;
-outline: none;
-font-size: 20px;
-font-weight: 600;
-border-radius: 7px;
-background-color: #2a37ea;
-cursor: pointer;
-color: white;
-margin-top: 12px;
-}
-
-.lastMessage {
-margin-top: 50px;
-font-size: 35px;
-font-weight: 600;
-color: darkgreen;
-margin-left: 550px;
-}
-
   </style>
   <body>
     <!-- <div class="header"></div> -->
@@ -552,52 +591,55 @@ margin-left: 550px;
       </header>
       <main class="main">
         <div class="left-panel">
-            <!-- <h2>Email Template</h2> -->
+          <!-- <h2>Email Template</h2> -->
           <div class="editor_container">
-            <div id="editor" class="ck-editor__editable">
-            </div>
-            
+            <div id="editor" class="ck-editor__editable"></div>
           </div>
           <div class="form-controls" id="formControls" style="display: none">
-            <h2 style="font-size: 15px; margin-bottom: 5px; text-align: center; margin-top: -10px;">Email Generator Prompt</h2>
+            <h2
+              style="
+                font-size: 15px;
+                margin-bottom: 5px;
+                text-align: center;
+                margin-top: -10px;
+              "
+            >
+              Email Generator Prompt
+            </h2>
             <div class="editor_container">
-              <div id="editor_prompt" class="ck-editor__editable">
-              </div>
+              <div id="editor_prompt" class="ck-editor__editable"></div>
             </div>
-            
           </div>
           <button class="switch-button" onclick="showEditor()">
             Save and submit template
           </button>
           <button class="config-button">Save and submit prompt</button>
-          <div style="margin-top: -40px;">
-            <div class="chatBot" id="chatBot" style="display: none;">
-                <header>
-                    <h2>ChatBot</h2>
-                    <span alt="Close"
-                          id="cross"
-                          onclick="cancel()">X</span>
-                </header>
-                <ul class="chatbox">
-                    <li class="chat-incoming chat">
-                        <p>Hey! How can I assist you today?</p>
-                    </li>
-                </ul>
-                <div class="chat-input">
-                    <textarea rows="0" cols="17"
-                              placeholder="Enter a message..."></textarea>
-                    <button id="sendBTN">Send</button>
-                </div>
-                <button>Generate final Preview</button>
+          <div style="margin-top: -40px">
+            <div class="chatBot" id="chatBot" style="display: none">
+              <header>
+                <h2>ChatBot</h2>
+                <span alt="Close" id="cross" onclick="cancel()">X</span>
+              </header>
+              <ul class="chatbox">
+                <li class="chat-incoming chat">
+                  <p>Hey! How can I assist you today?</p>
+                </li>
+              </ul>
+              <div class="chat-input">
+                <textarea
+                  rows="0"
+                  cols="17"
+                  placeholder="Enter a message..."
+                ></textarea>
+                <button id="sendBTN">Send</button>
+              </div>
+              <button>Generate final Preview</button>
             </div>
-        </div>
-
-          
-          
+          </div>
         </div>
 
         <div class="right-panel">
-          <h2 style="margin-top: -15px;">Preview</h2>
+          <h2 style="margin-top: -15px">Preview</h2>
           <!-- <div class="preview-box"> -->
           -->
           <!-- Slideshow container -->
@@ -649,145 +691,142 @@ margin-left: 550px;
             <span class="dot" onclick="currentSlide(4)"></span>
           </div>
           <!-- </div> -->
-          <button class="send_button" style="margin-top: 7px;">Refine Email</button>
+          <button class="send_button" style="margin-top: 7px">
+            Refine Email
+          </button>
         </div>
 
-       
+        <div class="welcome-back"></div>
+
         <!-- <button>Generate</button> -->
-   
       </main>
-
-     
-      
     </div>
+
     <script>
+      // Add function to show the chatbot and hide other elements
+      function showChatBot() {
+        // Hide all other elements in the left panel
+        const leftPanelChildren =
+          document.querySelector(".left-panel").children;
+        for (let i = 0; i < leftPanelChildren.length; i++) {
+          leftPanelChildren[i].style.display = "none";
+        }
 
-// Add function to show the chatbot and hide other elements
-function showChatBot() {
-    // Hide all other elements in the left panel
-    const leftPanelChildren = document.querySelector('.left-panel').children;
-    for (let i = 0; i < leftPanelChildren.length; i++) {
-        leftPanelChildren[i].style.display = 'none';
-    }
+        // Show the chatbot div
+        document.getElementById("chatBot").style.display = "block";
+      }
 
-    // Show the chatbot div
-    document.getElementById('chatBot').style.display = 'block';
-}
+      // Add event listener to the "Refine Email" button
+      document
+        .querySelector(".send_button")
+        .addEventListener("click", showChatBot);
 
-// Add event listener to the "Refine Email" button
-document.querySelector('.send_button').addEventListener('click', showChatBot);
+      function showChatBot() {
+        // Hide other elements in the left panel
+        document.querySelector(".editor_container").style.display = "none";
+        document.querySelector(".form-controls").style.display = "none";
+        document.querySelector(".switch-button").style.display = "none";
+        document.querySelector(".config-button").style.display = "none";
 
+        // Show the chatbot div
+        document.getElementById("chatBot").style.display = "block";
+      }
 
-function showChatBot() {
-    // Hide other elements in the left panel
-    document.querySelector('.editor_container').style.display = 'none';
-    document.querySelector('.form-controls').style.display = 'none';
-    document.querySelector('.switch-button').style.display = 'none';
-    document.querySelector('.config-button').style.display = 'none';
+      // Add event listener to the "Refine Email" button
+      document
+        .querySelector(".send_button")
+        .addEventListener("click", showChatBot);
 
-    // Show the chatbot div
-    document.getElementById('chatBot').style.display = 'block';
-}
+      // script.js
 
-// Add event listener to the "Refine Email" button
-document.querySelector('.send_button').addEventListener('click', showChatBot);
+      const chatInput = document.querySelector(".chat-input textarea");
+      const sendChatBtn = document.querySelector(".chat-input button");
+      const chatbox = document.querySelector(".chatbox");
 
-        // script.js
+      let userMessage;
+      const API_KEY = "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";
 
-const chatInput = 
-	document.querySelector('.chat-input textarea');
-const sendChatBtn = 
-	document.querySelector('.chat-input button');
-const chatbox = document.querySelector(".chatbox");
+      //OpenAI Free APIKey
 
-let userMessage;
-const API_KEY = 
-	"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";
+      const createChatLi = (message, className) => {
+        const chatLi = document.createElement("li");
+        chatLi.classList.add("chat", className);
+        let chatContent =
+          className === "chat-outgoing"
+            ? `<p>${message}</p>`
+            : `<p>${message}</p>`;
+        chatLi.innerHTML = chatContent;
+        return chatLi;
+      };
 
-//OpenAI Free APIKey
+      const generateResponse = (incomingChatLi) => {
+        const API_URL = "https://api.openai.com/v1/chat/completions";
+        const messageElement = incomingChatLi.querySelector("p");
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${
+              sk - proj - ak2NjxKNplw3Dyxt0zYsT3BlbkFJLtOvYatMhGX2thXwzDzo
+            }`,
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [
+              {
+                role: "user",
+                content: userMessage,
+              },
+            ],
+          }),
+        };
 
-const createChatLi = (message, className) => {
-	const chatLi = document.createElement("li");
-	chatLi.classList.add("chat", className);
-	let chatContent = 
-		className === "chat-outgoing" ? `<p>${message}</p>` : `<p>${message}</p>`;
-	chatLi.innerHTML = chatContent;
-	return chatLi;
-}
+        fetch(API_URL, requestOptions)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            messageElement.textContent = data.choices[0].message.content;
+          })
+          .catch((error) => {
+            messageElement.classList.add("error");
+            messageElement.textContent =
+              "Oops! Something went wrong. Please try again!";
+          })
+          .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+      };
 
-const generateResponse = (incomingChatLi) => {
-	const API_URL = "https://api.openai.com/v1/chat/completions";
-	const messageElement = incomingChatLi
-	.querySelector("p");
-	const requestOptions = {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			"Authorization": `Bearer ${sk-proj-ak2NjxKNplw3Dyxt0zYsT3BlbkFJLtOvYatMhGX2thXwzDzo}`
-		},
-		body: JSON.stringify({
-			"model": "gpt-3.5-turbo",
-			"messages": [
-				{
-					role: "user",
-					content: userMessage
-				}
-			]
-		})
-	};
+      const handleChat = () => {
+        userMessage = chatInput.value.trim();
+        if (!userMessage) {
+          return;
+        }
+        chatbox.appendChild(createChatLi(userMessage, "chat-outgoing"));
+        chatbox.scrollTo(0, chatbox.scrollHeight);
 
-	fetch(API_URL, requestOptions)
-		.then(res => {
-			if (!res.ok) {
-				throw new Error("Network response was not ok");
-			}
-			return res.json();
-		})
-		.then(data => {
-			messageElement
-			.textContent = data.choices[0].message.content;
-		})
-		.catch((error) => {
-			messageElement
-			.classList.add("error");
-			messageElement
-			.textContent = "Oops! Something went wrong. Please try again!";
-		})
-		.finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-};
+        setTimeout(() => {
+          const incomingChatLi = createChatLi("Thinking...", "chat-incoming");
+          chatbox.appendChild(incomingChatLi);
+          chatbox.scrollTo(0, chatbox.scrollHeight);
+          generateResponse(incomingChatLi);
+        }, 600);
+      };
 
+      sendChatBtn.addEventListener("click", handleChat);
 
-const handleChat = () => {
-	userMessage = chatInput.value.trim();
-	if (!userMessage) {
-		return;
-	}
-	chatbox
-	.appendChild(createChatLi(userMessage, "chat-outgoing"));
-	chatbox
-	.scrollTo(0, chatbox.scrollHeight);
-
-	setTimeout(() => {
-		const incomingChatLi = createChatLi("Thinking...", "chat-incoming")
-		chatbox.appendChild(incomingChatLi);
-		chatbox.scrollTo(0, chatbox.scrollHeight);
-		generateResponse(incomingChatLi);
-	}, 600);
-}
-
-sendChatBtn.addEventListener("click", handleChat);
-
-// function cancel() {
-// 	let chatbotcomplete = document.querySelector(".chatBot");
-// 	if (chatbotcomplete.style.display != 'none') {
-// 		chatbotcomplete.style.display = "none";
-// 		let lastMsg = document.createElement("p");
-// 		lastMsg.textContent = 'Thanks for using our Chatbot!';
-// 		lastMsg.classList.add('lastMessage');
-// 		document.body.appendChild(lastMsg)
-// 	}
-// }
-
+      // function cancel() {
+      // 	let chatbotcomplete = document.querySelector(".chatBot");
+      // 	if (chatbotcomplete.style.display != 'none') {
+      // 		chatbotcomplete.style.display = "none";
+      // 		let lastMsg = document.createElement("p");
+      // 		lastMsg.textContent = 'Thanks for using our Chatbot!';
+      // 		lastMsg.classList.add('lastMessage');
+      // 		document.body.appendChild(lastMsg)
+      // 	}
+      // }
     </script>
     <script>
       const numStars = 100; // Adjust the number of stars as needed
@@ -808,23 +847,22 @@ sendChatBtn.addEventListener("click", handleChat);
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
     <script>
       function showEditor() {
-    document.getElementById("formControls").style.display = "none";
-    document.querySelector(".editor_container").style.display = "block";
-    document.getElementById("emailTemplateHeader").style.display = "none"; // Hide the email template header
-}
+        document.getElementById("formControls").style.display = "none";
+        document.querySelector(".editor_container").style.display = "block";
+        document.getElementById("emailTemplateHeader").style.display = "none"; // Hide the email template header
+      }
 
-function showFormControls() {
-    document.getElementById("formControls").style.display = "block";
-    document.querySelector(".editor_container").style.display = "none";
-    document.getElementById("emailTemplateHeader").style.display = "block"; // Show the email template header
-}
-
+      function showFormControls() {
+        document.getElementById("formControls").style.display = "block";
+        document.querySelector(".editor_container").style.display = "none";
+        document.getElementById("emailTemplateHeader").style.display = "block"; // Show the email template header
+      }
 
       document
         .querySelector(".config-button")
         .addEventListener("click", showFormControls);
 
-        const preformattedText = `
+      const preformattedText = `
 <p>SUBJECT: You're invited to SUMMER OF LOVE! &lt;3</p>
 <p></p>
 <p>Hello Members of the Spice Kingdom,</p>
@@ -856,7 +894,7 @@ And who can forget the wild, passionate love of the Jungle. Amidst the verdant l
 <p><a href="http://instagram.com/spicekingofzanzibar">http://instagram.com/spicekingofzanzibar</a></p>
 `;
 
-const preformattedText2 = `
+      const preformattedText2 = `
 <p style="color: black;">Imagine that you are an email marketer hired to write a drip campaign for a business. The goal of the drip campaign is to convert the user that gives you the email into a paying customer by giving them information and value.</p>
 
 <p>The business is a startup consulting company that will advice startup founders on starting their first company.</p>
@@ -1016,5 +1054,25 @@ Spice King</p>
         dots[slideIndex - 1].className += " active";
       }
     </script>
+
+
+    <script src="/static/"></script>
+
+    <script
+    src="https://unpkg.com/react@16/umd/react.production.min.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+    crossorigin
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel" src="/static/WelcomeBack.js"></script>
+
+  <script type="text/babel">
+    ReactDOM.render(<WelcomeBack />, document.querySelector(".welcome-back"));
+  </script>
+
   </body>
 </html>

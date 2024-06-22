@@ -331,7 +331,7 @@
         const span = document.getElementsByClassName("close")[0];
 
         // Check if the user is logged in for the first time
-        const loggedIn = {{ logged_in|tojson }}; // Pass this variable from the backend
+        const loggedIn = JSON.parse('{{ logged_in|tojson }}'); // Pass this variable from the backend
         if (!loggedIn) {
             modal.style.display = "block";
         }
