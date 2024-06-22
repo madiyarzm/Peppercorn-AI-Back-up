@@ -12,3 +12,4 @@ customer3.csv
 utils/test.py
 utils/test-gpt-3.5.py
 utils/customers_categorization.py
+llm.zip

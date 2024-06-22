@@ -115,3 +115,15 @@ class DBManager:
         self.clients_collection.update_one(
             {"username": client_username}, {"$set": {"customers": merged_customers}}
         )
+
+
+    def get_business_context(self, username):
+        result = self.clients_collection.find_one(
+            {"username": username},
+            {"_id": 0, "business_context": 1}
+        )
+        if result:
+            business_context = result.get('business_context')
+            if business_context:
+                return business_context
+        return None
