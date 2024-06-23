@@ -52,7 +52,10 @@ async def use_data(request: Request, upload_id: str):
     customer_data = DB_Manager.retrieve_data_as_table(upload_id)
 
     # Convert the customer data into a list of dictionaries
-    customers = [dict(row) for row in customer_data]
+    customers = [
+        {"name": row["name"], "email": row["email"], "income": row["income"], "age": row["age"], "gender": row["gender"], "city": row["city"], "hobby": row["hobby"]}
+        for row in customer_data
+    ]
 
     # Get the username
     username = request.cookies.get("username")
