@@ -83,26 +83,33 @@ async def customer_list(
     logged_in = existing_user.get("logged-in", False)
 
     return templates.TemplateResponse(
-        "customer_list.html", {"request": request, "customer_data": customers, "logged_in": logged_in}
+        "customer_list.html",
+        {"request": request, "customer_data": customers, "logged_in": logged_in},
     )
+
 
 @login_router.post("/customer-list")
 async def save_business_context(
-    request: Request,
-    context: BusinessContext,
-    username: str = Cookie(None)
-    
+    request: Request, context: BusinessContext, username: str = Cookie(None)
 ):
     if username is None:
         raise HTTPException(status_code=401, detail="Unauthorized access")
 
-    # Save the business context
-    DB_Manager.save_business_context(username, context.dict())
+    # Retrieve the user from the database
+    user = DB_Manager.check_user({"username": username})
 
-    # Update the logged-in status
-    DB_Manager.clients_collection.update_one(
-        {"username": username},
-        {"$set": {"logged-in": True}}
-    )
+    if user is None:
+        raise HTTPException(status_code=401, detail="Unauthorized access")
+
+    # Check if the user is already logged in
+    if not user.get("logged-in", False):
+        # Save the business context
+        DB_Manager.save_business_context(username, context.dict())
+
+        # Update the logged-in status
+        DB_Manager.clients_collection.update_one(
+            {"username": username},
+            {"$set": {"logged-in": True}}
+        )
 
     return RedirectResponse(url="/customer-list", status_code=303)
