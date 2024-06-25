@@ -18,19 +18,27 @@ class DBManager:
         return self.clients_collection.find_one(username)
 
     def insert_user(self, user):
-        hashed_password, salt = hash_password(user["password"])
+        hashed_password = hash_password(user["password"])
         self.clients_collection.insert_one(
-            {"username": user["username"], "password": [hashed_password, salt]}
+            {"username": user["username"], "password": hashed_password, "logged-in": False}
         )
 
     def validate_user(self, user):
-
         user_record = self.clients_collection.find_one({"username": user["username"]})
         if user_record:
-            stored_hashed_password = user_record["password"][0]
-            stored_salt = user_record["password"][1]
-            if verify_password(user["password"], stored_hashed_password, stored_salt):
+            stored_hashed_password = user_record["password"]
+            if verify_password(user["password"], stored_hashed_password):
+                # self.clients_collection.update_one(
+                #     {"username": user["username"]},
+                #     {"$set": {"logged-in": True}}
+                # )
                 return user_record
+
+    def save_business_context(self, username, context):
+        self.clients_collection.update_one(
+            {"username": username},
+            {"$set": {"business_context": context}}
+        )
 
     def insert_upload_record(self, data):
         return self.clients_uploads_collection.insert_one(data)
@@ -107,3 +115,15 @@ class DBManager:
         self.clients_collection.update_one(
             {"username": client_username}, {"$set": {"customers": merged_customers}}
         )
+
+
+    def get_business_context(self, username):
+        result = self.clients_collection.find_one(
+            {"username": username},
+            {"_id": 0, "business_context": 1}
+        )
+        if result:
+            business_context = result.get('business_context')
+            if business_context:
+                return business_context
+        return None
