@@ -6,10 +6,10 @@
 *.py linguist-language=Python
 
 # Mark JavaScript files
-*.js linguist-language=JavaScript
+#*.js linguist-language=JavaScript
 
 # Mark React files (JSX)
 *.jsx linguist-language=JavaScript
 
 # Ignore certain files if needed (optional)
-*.md linguist-documentation
+#*.md linguist-documentation
