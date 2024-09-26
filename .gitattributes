@@ -1,15 +1,19 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-* linguist-vendored
-
-# Mark Python files
+# Force Python recognition
 *.py linguist-language=Python
 
-# Mark JavaScript files
-#*.js linguist-language=JavaScript
+# Force JavaScript recognition for JS files
+*.js linguist-language=JavaScript
 
-# Mark React files (JSX)
-#*.jsx linguist-language=JavaScript
+# Force JavaScript recognition for React JSX files
+*.jsx linguist-language=JavaScript
 
-# Ignore certain files if needed (optional)
-#*.md linguist-documentation
+# Optional: If you want to classify HTML/CSS or any other language
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+
+# Treat Markdown files as documentation
+*.md linguist-documentation
+
+# Ignore certain files (like config) from affecting language stats
+*.json linguist-vendored
+*.lock linguist-vendored
