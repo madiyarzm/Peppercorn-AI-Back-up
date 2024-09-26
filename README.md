@@ -2,7 +2,7 @@
 
 # Peppercorn AI
 
----<img width="1273" alt="main_page_wall" src="https://github.com/user-attachments/assets/07786197-fd8f-4444-8cf3-21dc0afb4ba2">
+<img width="1273" alt="main_page_wall" src="https://github.com/user-attachments/assets/07786197-fd8f-4444-8cf3-21dc0afb4ba2">
 
 
 
@@ -81,4 +81,9 @@ Peppercorn AI is an AI-powered email marketing tool designed to enhance drip cam
    ```bash
    npm start
    ```
+<img width="1272" alt="Снимок экрана 2024-09-26 в 7 02 51 PM" src="https://github.com/user-attachments/assets/083cbeca-a8be-45c2-99a1-cf831865a1d7">
+<img width="1280" alt="Снимок экрана 2024-09-26 в 7 08 27 PM" src="https://github.com/user-attachments/assets/84ae7e67-81d5-4bf4-9ac6-d43f548236dc">
+<img width="1280" alt="Снимок экрана 2024-09-26 в 7 08 14 PM" src="https://github.com/user-attachments/assets/fcadc570-c28e-418a-992d-97400d19af74">
+
+
 
