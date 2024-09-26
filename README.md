@@ -1,10 +1,10 @@
-Here’s a sample `README.md` file for your GitHub repository based on the project:
 
----
 
 # Peppercorn AI
 
-![Main Page](./path-to-your-image/main_page_wall.png)
+---<img width="1273" alt="main_page_wall" src="https://github.com/user-attachments/assets/07786197-fd8f-4444-8cf3-21dc0afb4ba2">
+
+
 
 ## Project Description
 
@@ -82,16 +82,3 @@ Peppercorn AI is an AI-powered email marketing tool designed to enhance drip cam
    npm start
    ```
 
-## Usage
-
-- Access the login and registration page through the home screen.
-- Personalize your email marketing campaigns by integrating customer data.
-- Monitor email campaigns and customer engagement.
-
-## Contributing
-
-Feel free to contribute to this project by submitting issues or pull requests. Please follow the standard GitHub contribution guidelines.
-
----
-
-Let me know if you want any modifications to this!
