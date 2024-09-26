@@ -8,8 +8,8 @@
 *.jsx linguist-language=JavaScript
 
 # Optional: If you want to classify HTML/CSS or any other language
-*.html linguist-language=HTML
-*.css linguist-language=CSS
+*.html linguist-vendored
+*.css linguist-vendored
 
 # Treat Markdown files as documentation
 *.md linguist-documentation
